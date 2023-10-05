@@ -1,6 +1,7 @@
 // [vidrio, latas, plastico, papel y carton, organico, PET1]
+import { NextResponse } from "next/server";
 
-const puntos = [
+export const puntos = [
     {id: 1, nombre : "teniente merino", coordenadas : [-39.83724346811184, -73.21689739542651], tipos : [1,1,0,0,0,0]},
     {id: 2, nombre : "parque kramer", coordenadas : [-39.832286781644754, -73.22837769564308], tipos : [1,1,0,0,0,0]},
     {id: 3, nombre : "Circunvalación sur &  rene Schneider", coordenadas : [-39.84626687810097, -73.21742145138901], tipos : [1,1,0,0,0,0]},
@@ -49,3 +50,7 @@ const puntos = [
     {id: 46, nombre : "condominio Fundo la Esperanza", coordenadas : [-39.857084990099295, -73.20853751829904], tipos : [1,1,0,0,0,0]},
     
 ]
+
+export async function GET(){
+    return new NextResponse.json(puntos);
+  }
