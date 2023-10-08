@@ -4,15 +4,15 @@ const fetchData = async ()=>{
   const response = await import("./api/puntos",{
     method: "GET",
   });
-  const data = response.data;
-  return data;
+  const puntos = response.puntos;
+  return puntos;
 }
 
 export default async function Home() {
   const data = await fetchData();
   return (
     <div>
-      <div id="map">
+      <div>
         <Map data={data}/>
       </div>
     </div>
