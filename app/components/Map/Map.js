@@ -1,15 +1,12 @@
 import "leaflet/dist/leaflet.css"
 import "@/app/globals.css"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
-import marker from "./Vector.svg"
-import { Icon } from "leaflet";
 
 //Codigo copiado directamente de un chico de youtube llamado halfword :') tankiu
 
 var CustomIcon = L.Icon.extend({
     options: {
         iconSize: [32, 32],     // Tamaño del icono
-        iconAnchor: [22, 94],   // Punto del icono que corresponderá a la ubicación exacta del marcador
         popupAnchor: [-3, -76]  // Punto desde donde se mostrará el popup en relación al icono
     }
 });
