@@ -2,7 +2,7 @@ import "leaflet/dist/leaflet.css"
 import "@/app/globals.css"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 import marker from "./Vector.svg"
-import { Icon, marker } from "leaflet";
+import { Icon } from "leaflet";
 
 //Codigo copiado directamente de un chico de youtube llamado halfword :') tankiu
 
