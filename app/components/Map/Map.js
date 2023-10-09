@@ -1,20 +1,15 @@
 import "leaflet/dist/leaflet.css"
 import "@/app/globals.css"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
+import marker from "./Vector.svg"
+import { Icon, marker } from "leaflet";
 
 //Codigo copiado directamente de un chico de youtube llamado halfword :') tankiu
 
-function Marcas(data){
-    const puntos = data.map((value) => {
-        return(
-            <Marker position={value.coordenadas}>
-                <Popup>{value.nombre}</Popup>
-            </Marker>
-        )
-    });
-    return(puntos);
-}
-
+const MyIcon = new Icon({
+    iconUrl: marker,
+    iconSize:[25,25]
+})
 
 function Map( {data} ){
     return(
@@ -26,8 +21,7 @@ function Map( {data} ){
             />
 
             {data.map((values)=>( 
-                <Marker position={values.coordenadas}>
-                    <Popup>{values.nombre}</Popup>
+                <Marker position={values.coordenadas} icon={MyIcon}>
                 </Marker>
             ))}
             
