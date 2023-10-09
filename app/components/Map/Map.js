@@ -1,4 +1,3 @@
-import "leaflet/dist/leaflet.css"
 import "@/app/globals.css"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 import marker from "./Vector.svg"
