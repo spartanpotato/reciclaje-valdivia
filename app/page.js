@@ -12,9 +12,6 @@ export default async function Home() {
   const data = await fetchData();
   return (
     <div>
-      <div className="titulo">
-        <img src="reciclaje" width="20px" height="20px"/>
-      </div>
       <div className="center">
         <Map data={data}/>
       </div>
