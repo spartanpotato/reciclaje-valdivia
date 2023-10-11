@@ -11,10 +11,11 @@ import Link from "next/link";
 //   { nombre: "Ejemplo 7", url: "/ejemplo-7" },
 // ];
 
+//añadi .png a la imagen para que funcione cambie width de 2 rem a 50 rem
 export default function Header() {
   return (
     <nav className="navegacion">
-        <img src="reciclaje" width="2rem" height="2rem"/>
+        <img src="reciclaje.png" width="50rem" height="2rem"/> 
         <p className="titulo">Puntos de reciclaje en Valdivia</p>
     </nav>
   );
