@@ -11,7 +11,7 @@ const fetchData = async ()=>{
 export default async function Home() {
   const data = await fetchData();
   return (
-      <div className="center">
+      <div className="center" color="d8f6d7">
         <Map data={data}/>
       </div>
   )

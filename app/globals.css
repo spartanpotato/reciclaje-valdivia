@@ -1,5 +1,7 @@
 .navegacion {
-  background-color: rgb(216, 246, 215); /* Color de fondo */
+  background-color: #d8f6d7; /* Color de fondo */
+  background-image: url("../public/background.png");
+  
   color: #505050;
   padding: 10px 10px; /* Relleno, 10 arriba y abajo, 5 izquierda y derecha */
   display: flex; /* Mostrar como Flexbox */
@@ -26,7 +28,7 @@
 }
 
 .titulo{
-  color: #67B660;
+  color: #276422;
   font-size: 2rem;
 }
 
