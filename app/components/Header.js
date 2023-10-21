@@ -15,7 +15,7 @@ import Link from "next/link";
 export default function Header() {
   return (
     <nav className="navegacion">
-        <img src="reciclaje.png" width="80rem" height="2rem"/> 
+        <img src="reciclaje.png" width="6%" height="5%"/> 
         <p className="titulo">Puntos de reciclaje en Valdivia</p>
     </nav>
   );
