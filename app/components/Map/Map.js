@@ -22,6 +22,7 @@ const MyIcon = new CustomIcon({
 function Map({ data }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentValue, setCurrentValue] = useState({});
+  const [currentArray, setCurrentArray] = useState([]);
 
   return (
     <>
@@ -48,12 +49,13 @@ function Map({ data }) {
               click: () => {
                 onOpen();
                 setCurrentValue(values);
+                setCurrentArray(values.tipos);
               },
             }}
           ></Marker>
         ))}
       </MapContainer>
-      <DrawerComponent currentValue={currentValue} isOpen={isOpen} onClose={onClose} />
+      <DrawerComponent currentValue={currentValue} isOpen={isOpen} onClose={onClose} array={currentArray} />
     </>
   );
 }

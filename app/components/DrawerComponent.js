@@ -7,10 +7,20 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Button,
+  List,
+  ListItem,
+  UnorderedList,
+  Box
 } from "@chakra-ui/react";
 import { useRef } from "react";
 
-const DrawerComponent = ({ isOpen, onClose, currentValue }) => {
+const mapTypes = ({info}) => {
+  for (let i = 0; i < 5; i++){
+    
+  }
+}
+
+const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
   const { btnOpen } = useRef();
   console.log(currentValue);
 
@@ -20,8 +30,17 @@ const DrawerComponent = ({ isOpen, onClose, currentValue }) => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>{currentValue.id}</DrawerHeader>
-          <DrawerBody>Content</DrawerBody>
+          <DrawerHeader>{currentValue.nombre}</DrawerHeader>
+          <DrawerBody>
+            <Box>
+            <DrawerHeader>Permite reciclar:</DrawerHeader>
+            <UnorderedList>
+              {array.map((info) => (
+                <ListItem>{info}</ListItem>
+              ))}
+            </UnorderedList>
+            </Box>
+          </DrawerBody>
 
           <DrawerFooter>
             <Button variant="outline" mr={3} onClick={onClose}>
