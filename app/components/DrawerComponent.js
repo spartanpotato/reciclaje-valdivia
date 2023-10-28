@@ -35,9 +35,14 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
             <Box>
             <DrawerHeader>Permite reciclar:</DrawerHeader>
             <UnorderedList>
-              {array.map((info) => (
-                <ListItem>{info}</ListItem>
-              ))}
+              {array.map((info) => {
+                const state = info;
+                if (state === 1){
+                return(
+                <ListItem>{state}</ListItem>
+                )
+                }
+                })}
             </UnorderedList>
             </Box>
           </DrawerBody>
