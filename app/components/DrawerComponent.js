@@ -36,13 +36,11 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
             <DrawerHeader>Permite reciclar:</DrawerHeader>
             <UnorderedList>
               {array.map((info) => {
-                const state = info;
+                const state = info.estado;
                 if (state === 1){
                 return(
-                <ListItem>{state}</ListItem>
-                )
-                }
-                })}
+                <ListItem>{info.tipo}</ListItem>
+                )}})}
             </UnorderedList>
             </Box>
           </DrawerBody>
