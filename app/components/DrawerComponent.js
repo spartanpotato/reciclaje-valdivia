@@ -1,3 +1,4 @@
+import "@/app/globals.css";
 import {
   Drawer,
   DrawerBody,
@@ -7,18 +8,10 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Button,
-  List,
   ListItem,
   UnorderedList,
-  Box
 } from "@chakra-ui/react";
 import { useRef } from "react";
-
-const mapTypes = ({info}) => {
-  for (let i = 0; i < 5; i++){
-    
-  }
-}
 
 const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
   const { btnOpen } = useRef();
@@ -26,14 +19,13 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
 
   return (
     <>
-      <Drawer finalFocusRef={btnOpen} isOpen={isOpen} placement="right" onClose={onClose}>
+      <Drawer finalFocusRef={btnOpen} isOpen={isOpen} placement="right" onClose={onClose} size={"md"}>
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent fontSize={"1.5vw"} background={"green.100"}>
           <DrawerCloseButton />
-          <DrawerHeader>{currentValue.nombre}</DrawerHeader>
+          <DrawerHeader fontSize={"2vw"}>{currentValue.nombre}</DrawerHeader>
           <DrawerBody>
-            <Box>
-            <DrawerHeader>Permite reciclar:</DrawerHeader>
+            <DrawerHeader fontSize={"1.75vw"} alignContent={"center"}>Permite reciclar:</DrawerHeader>
             <UnorderedList>
               {array.map((info) => {
                 const state = info.estado;
@@ -42,12 +34,11 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
                 <ListItem>{info.tipo}</ListItem>
                 )}})}
             </UnorderedList>
-            </Box>
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
+            <Button variant="solid" colorScheme={"teal"} color={"black"} mr={3} onClick={onClose}>
+              Volver
             </Button>
           </DrawerFooter>
         </DrawerContent>
