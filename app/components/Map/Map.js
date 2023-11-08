@@ -19,7 +19,7 @@ const MyIcon = new CustomIcon({
   iconUrl: "./Vector.svg",
 });
 
-function Map({ data }) {
+function Map({ data, tipos }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentValue, setCurrentValue] = useState({});
   const [currentArray, setCurrentArray] = useState([]);
@@ -40,12 +40,25 @@ function Map({ data }) {
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {data.map((values) => (
+        {data.map((values) => {
+          var aparece = false;
+          {tipos.map((tipo) => {
+            const estado = tipo.state;
+            const indice = tipo.indice;
+            if(estado && values.tipos[indice].estado){
+              aparece = true;
+            }
+
+          })}
+
+          if (aparece){
+          return (
           <Marker
             key={values.id} // key: React necesita una key para cada elemento que se renderiza (evita errores)
             position={values.coordenadas}
             icon={MyIcon}
             eventHandlers={{
+
               click: () => {
                 onOpen();
                 setCurrentValue(values);
@@ -53,7 +66,9 @@ function Map({ data }) {
               },
             }}
           ></Marker>
-        ))}
+          )
+          }
+        })}
       </MapContainer>
       <DrawerComponent currentValue={currentValue} isOpen={isOpen} onClose={onClose} array={currentArray} />
     </>
