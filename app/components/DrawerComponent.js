@@ -25,7 +25,12 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
           <DrawerCloseButton />
           <DrawerHeader fontSize={"2vw"}>{currentValue.nombre}</DrawerHeader>
           <DrawerBody>
-            <DrawerHeader fontSize={"1.75vw"} alignContent={"center"}>Permite reciclar:</DrawerHeader>
+           {/*<DrawerHeader fontSize={"1.75vw"} alignContent={"center"}>Permite reciclar:</DrawerHeader> */} 
+            <DrawerHeader fontSize={"1.75vw"} alignContent={"center"}>
+              <ul>
+                <li>Permite reciclar:</li>
+              </ul>
+            </DrawerHeader>
             <UnorderedList>
               {array.map((info) => {
                 const state = info.estado;
