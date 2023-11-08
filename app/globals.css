@@ -10,7 +10,6 @@
   align-items: center;
   justify-content: flex-start; /* Centrar los elementos */
   gap: 2vw; /* Espacio entre elementos */
-  margin-bottom: 1.5%;
   border-bottom: 1px solid #e1e1e1;
   object-fit: contain;
 }
@@ -28,11 +27,19 @@
   align-items: center;
   width: 100%;
   height: 100%;
+  z-index: 0;
 }
 
 .titulo{
   color: #276422;
   font-size:2.5vw;
+}
+
+.leyenda{
+  color: #1f321e;
+  font-size: 1.5vw;
+  margin-left: 5%;
+  font-family: 'Comic Sans MS', Comic Sans, sans-serif;
 }
 
 .homeMap{
@@ -41,6 +48,7 @@
   flex-wrap: wrap;
   width: 95%;
   height: 80vh;
+  z-index: 0;
 }
 
 .Menu{
@@ -58,11 +66,4 @@
   margin-top: 1%;
   margin-bottom: 1%;
   background-color: #CDFFD7;
-}
-
-.leyenda{
-  color: #1f321e;
-  font-size: 1.5vw;
-  margin-left: 5%;
-  font-family: 'Comic Sans MS', Comic Sans, sans-serif;
 }
