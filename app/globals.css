@@ -42,3 +42,14 @@
   width: 95%;
   height: 80vh;
 }
+
+.Menu{
+  z-index: 99;
+  margin-left: 2.5%;
+  margin-bottom: 0.5%;
+  margin-top: 0.5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color:#93DFA3;
+  color: black;
+}
