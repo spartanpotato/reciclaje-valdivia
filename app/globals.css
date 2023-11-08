@@ -59,3 +59,10 @@
   margin-bottom: 1%;
   background-color: #CDFFD7;
 }
+
+.leyenda{
+  color: #1f321e;
+  font-size: 1.5vw;
+  margin-left: 5%;
+  font-family: 'Comic Sans MS', Comic Sans, sans-serif;
+}
