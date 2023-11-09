@@ -41,17 +41,19 @@ function Map({ data, tipos }) {
         />
 
         {data.map((values) => {
-          var aparece = false;
+          var coincidencias = 0;
+          var filtros = 0;
           {tipos.map((tipo) => {
             const estado = tipo.state;
             const indice = tipo.indice;
+            if (estado){filtros +=1;}
             if(estado && values.tipos[indice].estado){
-              aparece = true;
+              coincidencias += 1;
             }
 
           })}
 
-          if (aparece){
+          if ((coincidencias >= filtros) || filtros === 0){
           return (
           <Marker
             key={values.id} // key: React necesita una key para cada elemento que se renderiza (evita errores)

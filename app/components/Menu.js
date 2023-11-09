@@ -18,12 +18,12 @@ import {
 import { useState } from "react";
 
 function Menu_1( {data} ) {
-    const [Vidrio, setVidrio] = useState(1);
-    const [Latas, setLatas] = useState(1);
-    const [Plastico, setPlastico] = useState(1);
-    const [Papel_Carton, setPapel_Carton] = useState(1);
-    const [Organico, setOrganico] = useState(1);
-    const [PET1, setPET1] = useState(1);
+    const [Vidrio, setVidrio] = useState(0);
+    const [Latas, setLatas] = useState(0);
+    const [Plastico, setPlastico] = useState(0);
+    const [Papel_Carton, setPapel_Carton] = useState(0);
+    const [Organico, setOrganico] = useState(0);
+    const [PET1, setPET1] = useState(0);
 
     const tipos_1 = [{state: Vidrio, indice: 0},
                 {state: Latas, indice: 1},
@@ -43,27 +43,27 @@ function Menu_1( {data} ) {
             <MenuList className="Menu" closeOnSelect="false">
 
                 <MenuItem className="Checkbox">
-                    <Checkbox defaultChecked onChange={()=>setVidrio(!Vidrio)}>Vidrio</Checkbox>
+                    <Checkbox  onChange={()=>setVidrio(!Vidrio)}>Vidrio</Checkbox>
                 </MenuItem>
 
                 <MenuItem className="Checkbox">
-                    <Checkbox defaultChecked onChange={()=>setLatas(!Latas)}>Latas</Checkbox>
+                    <Checkbox  onChange={()=>setLatas(!Latas)}>Latas</Checkbox>
                 </MenuItem>
 
                 <MenuItem className="Checkbox">
-                    <Checkbox defaultChecked onChange={()=>setPlastico(!Plastico)}>Plastico</Checkbox>
+                    <Checkbox  onChange={()=>setPlastico(!Plastico)}>Plastico</Checkbox>
                 </MenuItem>
 
                 <MenuItem className="Checkbox">
-                    <Checkbox defaultChecked onChange={()=>setPapel_Carton(!Papel_Carton)}>Papel/Carton</Checkbox>
+                    <Checkbox onChange={()=>setPapel_Carton(!Papel_Carton)}>Papel/Carton</Checkbox>
                 </MenuItem>
 
                 <MenuItem className="Checkbox">
-                    <Checkbox defaultChecked onChange={()=>setOrganico(!Organico)}>Organico</Checkbox>
+                    <Checkbox  onChange={()=>setOrganico(!Organico)}>Organico</Checkbox>
                 </MenuItem>
 
                 <MenuItem className="Checkbox">
-                    <Checkbox defaultChecked onChange={()=>setPET1(!PET1)}>PET1</Checkbox>
+                    <Checkbox  onChange={()=>setPET1(!PET1)}>PET1</Checkbox>
                 </MenuItem>
 
             </MenuList>
