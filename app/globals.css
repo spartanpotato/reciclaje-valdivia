@@ -31,7 +31,7 @@
 }
 
 .titulo{
-  color: #276422;
+  color: #642251; /*troleito*/
   font-size:2.5vw;
 }
 
@@ -39,7 +39,7 @@
   color: #1f321e;
   font-size: 1.5vw;
   margin-left: 5%;
-  font-family: 'Comic Sans MS', Comic Sans, sans-serif;
+  font-family: 'Comic Sans MS', Comic Zanes, sans-serif;
 }
 
 .homeMap{
@@ -66,4 +66,8 @@
   margin-top: 1%;
   margin-bottom: 1%;
   background-color: #CDFFD7;
+}
+
+.accent {
+  color: #4557f5;
 }
