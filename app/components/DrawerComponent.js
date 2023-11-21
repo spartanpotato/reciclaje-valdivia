@@ -10,12 +10,34 @@ import {
   Button,
   ListItem,
   UnorderedList,
+  Box,
+  Input,
+  Text,
 } from "@chakra-ui/react";
 import { useRef } from "react";
+import ListComments from "./Comentarios/ListComments";
+import { useState,useEffect } from "react";
 
 const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
+  const [comentarios, setComentarios] = useState([]);
+  const [idApp, setIdApp] = useState("");
+  const [idItem, setIdItem] = useState("");
   const { btnOpen } = useRef();
   console.log(currentValue);
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const fetchData = async () => {
+      // Query : idApp
+      const response = await fetch("/api/peticionGetIdApp?idApp=" + idApp + "&idItem=" + idItem);
+      const data = await response.json();
+      console.log(data);
+      setComentarios(data);
+    };
+    fetchData();
+  };
+
 
   return (
     <>
@@ -25,12 +47,13 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
           <DrawerCloseButton />
           <DrawerHeader fontSize={"2vw"}>{currentValue.nombre}</DrawerHeader>
           <DrawerBody>
-           {/*<DrawerHeader fontSize={"1.75vw"} alignContent={"center"}>Permite reciclar:</DrawerHeader> */} 
+
             <DrawerHeader fontSize={"1.75vw"} alignContent={"center"}>
               <ul>
                 <li>Permite reciclar:</li>
               </ul>
             </DrawerHeader>
+
             <UnorderedList>
               {array.map((info) => {
                 const state = info.estado;
@@ -39,6 +62,27 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
                 <ListItem>{info.tipo}</ListItem>
                 )}})}
             </UnorderedList>
+
+            <Box>
+              <Text fontSize="xxl" fontWeight="bold" mb={4}>
+                Comentarios
+              </Text>
+
+              <form onSubmit={handleSubmit}>
+                <Input placeholder="Buscar por idApp" mb={4} onChange={(e) => setIdApp(e.target.value)} value={idApp} />
+                <Input placeholder="Buscar por idItem" mb={4} onChange={(e) => setIdItem(e.target.value)} value={idItem} />
+                <Button type="submit">Buscar</Button>
+              </form>
+
+              <Box>
+                <Text fontSize="xl" fontWeight="bold" mb={4} color="red.500">
+                  {comentarios.message && <Text>{comentario.message}</Text>}
+                </Text>
+                <ListComments comentarios={comentarios} />
+              </Box>
+              
+            </Box>
+
           </DrawerBody>
 
           <DrawerFooter>

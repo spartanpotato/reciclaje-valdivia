@@ -4,11 +4,19 @@ const API_URL = "https://info104-2023-2-db.onrender.com";
 
 // GET /api/comentarios: Todos los comentarios
 
-export async function GET() {
-  // Revalidate every 10 seconds
-  // const response = await fetch(API_URL + "/api/comentarios", { next: { revalidate: 10 } });
-  const response = await fetch(API_URL + "/api/comentarios?idApp=Reciclaje", { cache: "no-cache" });
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  console.log(searchParams);
+  const idApp = searchParams.get("idApp");
+  const idItem = searchParams.get("idItem");
+
+  const response = await fetch(
+    API_URL + `/api/comentarios?${idApp ? `idApp=${idApp}` : ""}${idItem ? `&idItem=${idItem}` : ""}`,
+    {
+      next: { revalidate: 10 },
+    }
+  );
+
   const data = await response.json();
-  console.log(data);
   return NextResponse.json(data);
 }
