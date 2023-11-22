@@ -16,12 +16,16 @@ import {
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import ListComments from "./Comentarios/ListComments";
+import CrearComentario from "./Comentarios/CrearComentario";
 import { useState,useEffect } from "react";
 
 const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
   const [comentarios, setComentarios] = useState([]);
   const [idApp, setIdApp] = useState("");
   const [idItem, setIdItem] = useState("");
+  const [usuario, setUsuario] = useState("");
+  const [comentario, setComnetario] = useState("");
+  const [enRespuestaA, setEnRespuestaA] = useState("");
   const { btnOpen } = useRef();
   console.log(currentValue);
 
@@ -30,13 +34,14 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
     e.preventDefault();
     const fetchData = async () => {
       // Query : idApp
-      const response = await fetch("/api/peticionGetIdApp?idApp=" + idApp + "&idItem=" + idItem);
+      const response = await fetch("/api/peticionGetIdApp?idApp=Reciclaje&idItem=" + currentValue.id);
       const data = await response.json();
       console.log(data);
       setComentarios(data);
     };
     fetchData();
   };
+
 
 
   return (
@@ -63,15 +68,23 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
                 )}})}
             </UnorderedList>
 
+            <CrearComentario
+            usuario={usuario}
+            setUsuario={setUsuario}
+            comentario={comentario}
+            setComentario={setComnetario}
+            idItem={currentValue.id}
+            enRespuestaA={enRespuestaA}
+            setEnRespuestaA={setEnRespuestaA}
+            />
+
             <Box>
               <Text fontSize="xxl" fontWeight="bold" mb={4}>
                 Comentarios
               </Text>
 
               <form onSubmit={handleSubmit}>
-                <Input placeholder="Buscar por idApp" mb={4} onChange={(e) => setIdApp(e.target.value)} value={idApp} />
-                <Input placeholder="Buscar por idItem" mb={4} onChange={(e) => setIdItem(e.target.value)} value={idItem} />
-                <Button type="submit">Buscar</Button>
+                <Button type="submit">Ver comentarios</Button>
               </form>
 
               <Box>
