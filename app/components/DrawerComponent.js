@@ -21,26 +21,21 @@ import { useState,useEffect } from "react";
 
 const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
   const [comentarios, setComentarios] = useState([]);
-  const [idApp, setIdApp] = useState("");
-  const [idItem, setIdItem] = useState("");
   const [usuario, setUsuario] = useState("");
   const [comentario, setComnetario] = useState("");
   const [enRespuestaA, setEnRespuestaA] = useState("");
+  const [cambio, setCambio] = useState(true);
   const { btnOpen } = useRef();
   console.log(currentValue);
 
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
     const fetchData = async () => {
-      // Query : idApp
       const response = await fetch("/api/peticionGetIdApp?idApp=Reciclaje&idItem=" + currentValue.id);
       const data = await response.json();
-      console.log(data);
       setComentarios(data);
     };
     fetchData();
-  };
+  }, [cambio,currentValue]);
 
 
 
@@ -76,16 +71,14 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
             idItem={currentValue.id}
             enRespuestaA={enRespuestaA}
             setEnRespuestaA={setEnRespuestaA}
+            cambio={cambio}
+            setCambio={setCambio}
             />
 
             <Box>
               <Text fontSize="xxl" fontWeight="bold" mb={4}>
                 Comentarios
               </Text>
-
-              <form onSubmit={handleSubmit}>
-                <Button type="submit">Ver comentarios</Button>
-              </form>
 
               <Box>
                 <Text fontSize="xl" fontWeight="bold" mb={4} color="red.500">

@@ -10,6 +10,8 @@ const CrearComentario = ({
   idItem,
   enRespuestaA,
   setEnRespuestaA,
+  cambio,
+  setCambio,
 }) => {
   const [ultimoComentario, setUltimoComentario] = useState({}); // [{}]
 
@@ -39,6 +41,7 @@ const CrearComentario = ({
     setUsuario("");
     setComentario("");
     setEnRespuestaA("");
+    setCambio(() => (!cambio));
   };
 
   return (
