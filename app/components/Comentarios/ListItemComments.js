@@ -1,35 +1,23 @@
 "use client";
+import "@/app/globals.css";
 import { Box, Text } from "@chakra-ui/react";
 //Copiado del ejemplo
 const ListItemComment = ({ comentario }) => {
-  const { enRespuestaA, idApp, idItem, comentario: comment, timestamp, usuario, __v, _id } = comentario;
-     
-  const esRespuesta = () => { // Función en caso de que el comentario sea en respuesta a otro comentario
-    if ({enRespuestaA} == null){
-      return null;
-    }else{
-      return (
-        <Text>
-          <b className="accent">enRespuestaA: </b>
-          {enRespuestaA}
-        </Text>
-        )};
-      };
+  const { enRespuestaA, comentario: comment, timestamp, usuario, __v, _id } = comentario;
 
   return (
-    <Box mb={2} borderRadius='lg' border="3px solid lightgreen" p={4}>
+    <Box className="comments" mb={3} borderRadius='5px' border="4px solid lightgreen" paddingTop={2} paddingBottom={2} paddingLeft={5}>
       {/* ID's */}
-      <Box mb={4}>
-        <Text fontSize="lg">
-          <b className="accent">Usuario: </b>
+      <Box>
+        <Text>
+          <b> Usuario: </b>
           {usuario}
-        </Text>
-        {esRespuesta()}
+        </Text>        
       </Box>
       {/* COMENTARIO */}
-      <Box mb={4}>
+      <Box>
         <Text>
-          <b className="accent">comentario: </b>
+          <b> comentario: </b>
           {comment}
         </Text>
       </Box>

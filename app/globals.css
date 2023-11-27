@@ -69,5 +69,10 @@
 }
 
 .accent {
-  color: #4557f5;
+  color: black;
+}
+
+.comments{
+  color: black;
+  font-size: large;
 }

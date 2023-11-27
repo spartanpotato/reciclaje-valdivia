@@ -1,6 +1,14 @@
-import { Text, Input, Button, Box, Textarea } from "@chakra-ui/react";
-import { useState } from "react";
-import ListItemComment from "./ListItemComments";
+import "@/app/globals.css";
+import { 
+  Input,
+  Button, 
+  Textarea,
+  Menu, 
+  MenuButton,
+  MenuList,
+  Center,
+  Box,
+} from "@chakra-ui/react";
 
 const CrearComentario = ({
   usuario,
@@ -8,12 +16,9 @@ const CrearComentario = ({
   comentario,
   setComentario,
   idItem,
-  enRespuestaA,
-  setEnRespuestaA,
   cambio,
   setCambio,
 }) => {
-  const [ultimoComentario, setUltimoComentario] = useState({}); // [{}]
 
   const sendRequest = async () => {
     const response = await fetch("/api/peticionPost", {
@@ -24,36 +29,40 @@ const CrearComentario = ({
         idItem: idItem,
         comentario: comentario,
         timestamp: Date.now(),
-        enRespuestaA: enRespuestaA === "" ? null : enRespuestaA,
+        enRespuestaA: null
       }),
     });
 
     const data = await response.json();
     console.log(data);
-    setUltimoComentario(data);
     alert("Comentario creado");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     sendRequest();
-    // Reset form
     setUsuario("");
     setComentario("");
-    setEnRespuestaA("");
     setCambio(() => (!cambio));
   };
 
   return (
     <>
-      <Box>
-        <form onSubmit={handleSubmit}>
-          <Input placeholder="Usuario" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
-          <Textarea placeholder="Comentario" value={comentario} onChange={(e) => setComentario(e.target.value)} />
-          <Input placeholder="En respuesta a" value={enRespuestaA} onChange={(e) => setEnRespuestaA(e.target.value)} />
-          <Button type="submit">Crear Comentario</Button>
-        </form>
-      </Box>
+      <Menu size={"s"}>
+        <MenuButton as={Button} mb={4}>
+        Crear Comentario
+        </MenuButton>
+
+        <MenuList>
+          <form onSubmit={handleSubmit}>
+            <Box textAlign={"center"}>
+            <Input placeholder="Usuario" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
+            <Textarea placeholder="Comentario" value={comentario} onChange={(e) => setComentario(e.target.value)} />
+            <Button type="submit">Crear</Button>
+            </Box>
+          </form>
+        </MenuList>
+      </Menu>
     </>
   );
 };
