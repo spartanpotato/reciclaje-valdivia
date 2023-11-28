@@ -23,14 +23,12 @@ function Menu_1( {data} ) {
     const [Plastico, setPlastico] = useState(0);
     const [Papel_Carton, setPapel_Carton] = useState(0);
     const [Organico, setOrganico] = useState(0);
-    const [PET1, setPET1] = useState(0);
 
     const tipos_1 = [{state: Vidrio, indice: 0},
                 {state: Latas, indice: 1},
                 {state: Plastico, indice: 2},
                 {state: Papel_Carton, indice: 3},
-                {state: Organico, indice: 4},
-                {state: PET1, indice: 5}];
+                {state: Organico, indice: 4}];
 
     return(
     <>
@@ -60,10 +58,6 @@ function Menu_1( {data} ) {
 
                 <MenuItem className="Checkbox">
                     <Checkbox  onChange={()=>setOrganico(!Organico)}>Organico</Checkbox>
-                </MenuItem>
-
-                <MenuItem className="Checkbox">
-                    <Checkbox  onChange={()=>setPET1(!PET1)}>PET1</Checkbox>
                 </MenuItem>
 
             </MenuList>
