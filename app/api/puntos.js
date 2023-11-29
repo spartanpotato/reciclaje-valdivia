@@ -139,6 +139,11 @@ export const puntos =[
 
     {id: 46, nombre : "condominio Fundo la Esperanza", coordenadas : [-39.857084990099295, -73.20853751829904],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
+
+    {id: 46, nombre : "Universidad austral de chile", coordenadas : [-39.832604, -73.252359],
+    tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 1}, {tipo : "papel/carton", estado : 1}, {tipo : "organico", estado : 0}]},
+
+
     
 ];
 
