@@ -53,11 +53,11 @@ const CrearComentario = ({
         Crear Comentario
         </MenuButton>
 
-        <MenuList>
+        <MenuList className="CrearComentarios">
           <form onSubmit={handleSubmit}>
             <Box textAlign={"center"}>
-            <Input placeholder="Usuario" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
-            <Textarea placeholder="Comentario" value={comentario} onChange={(e) => setComentario(e.target.value)} />
+            <Input className="CrearComentariosInput" placeholder="Usuario" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
+            <Textarea className="CrearComentariosInput" placeholder="Comentario" value={comentario} onChange={(e) => setComentario(e.target.value)} />
             <Button type="submit">Crear</Button>
             </Box>
           </form>

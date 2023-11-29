@@ -90,7 +90,7 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
             
 
           <DrawerFooter>
-            <Button variant="solid" colorScheme={"teal"} color={"black"} mr={3} onClick={onClose}>
+            <Button variant="solid" size={"lg"} mr={3} onClick={onClose}>
               Volver
             </Button>
           </DrawerFooter>
