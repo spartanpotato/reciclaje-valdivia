@@ -13,9 +13,11 @@ import {
     Button,
     Checkbox,
     CheckboxGroup,
-    useCheckbox
+    useCheckbox,
+    background
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { color } from "framer-motion";
 
 function Menu_1( {data} ) {
     const [Vidrio, setVidrio] = useState(0);
@@ -40,23 +42,23 @@ function Menu_1( {data} ) {
 
             <MenuList className="Menu" closeOnSelect="false">
 
-                <MenuItem className="Checkbox">
+                <MenuItem className="checkboxVidrios">
                     <Checkbox  onChange={()=>setVidrio(!Vidrio)}>Vidrio</Checkbox>
                 </MenuItem>
 
-                <MenuItem className="Checkbox">
+                <MenuItem className="checkboxLatas">
                     <Checkbox  onChange={()=>setLatas(!Latas)}>Latas</Checkbox>
                 </MenuItem>
 
-                <MenuItem className="Checkbox">
+                <MenuItem className="checkboxPlasticos">
                     <Checkbox  onChange={()=>setPlastico(!Plastico)}>Plastico</Checkbox>
                 </MenuItem>
 
-                <MenuItem className="Checkbox">
+                <MenuItem className="checkboxCarton">
                     <Checkbox onChange={()=>setPapel_Carton(!Papel_Carton)}>Papel/Carton</Checkbox>
                 </MenuItem>
 
-                <MenuItem className="Checkbox">
+                <MenuItem className="checkboxOrganico">
                     <Checkbox  onChange={()=>setOrganico(!Organico)}>Organico</Checkbox>
                 </MenuItem>
 

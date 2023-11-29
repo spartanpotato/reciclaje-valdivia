@@ -58,14 +58,38 @@
   margin-top: 0.5%;
   padding-left: 5%;
   padding-right: 5%;
-  background-color:#93DFA3;
+  background-color:#fcfcfc;
   color: black;
 }
 
-.Checkbox{
+.checkboxLatas {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    background-color: rgb(247, 222, 123);
+}
+
+.checkboxPlasticos {
   margin-top: 1%;
   margin-bottom: 1%;
-  background-color: #CDFFD7;
+  background-color: rgb(226, 132, 149);
+}
+
+.checkboxVidrios {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  background-color: rgb(129, 149, 228);
+}
+
+.checkboxCarton {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  background-color: rgb(233, 171, 135);
+}
+
+.checkboxOrganico {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  background-color: rgb(159, 226, 163);
 }
 
 .accent {
