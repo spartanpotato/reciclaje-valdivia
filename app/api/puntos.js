@@ -47,100 +47,94 @@ export const puntos =[
     {id: 15, nombre : "El Romance & vicente Carvallo", coordenadas : [-39.792575182891646, -73.21763448306706],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 16, nombre : "Camino Real", coordenadas : [-39.727699613185024, -73.11146830068284],
+    {id: 16, nombre : "República 414", coordenadas : [-39.79548920776816, -73.21805439382153],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 17, nombre : "República 414", coordenadas : [-39.79548920776816, -73.21805439382153],
+    {id: 17, nombre : "calle Balmaceda & Laguna San Rafael", coordenadas : [-39.79898463424185, -73.20591183787205],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 18, nombre : "calle Balmaceda & Laguna San Rafael", coordenadas : [-39.79898463424185, -73.20591183787205],
+    {id: 18, nombre : "Polan & Caspana", coordenadas : [-39.80032055399445, -73.20690384331188],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 19, nombre : "Polan & Caspana", coordenadas : [-39.80032055399445, -73.20690384331188],
+    {id: 19, nombre : "Condominio Miraflores 1", coordenadas : [-39.86281234445523, -73.24750853348291],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 20, nombre : "Condominio Miraflores 1", coordenadas : [-39.86281234445523, -73.24750853348291],
+    {id: 20, nombre : "Condominio Miraflores 2", coordenadas : [-39.86521986612106, -73.24297282080647],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 21, nombre : "Condominio Miraflores 2", coordenadas : [-39.86521986612106, -73.24297282080647],
-    tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
-
-    {id: 22, nombre : "Parque Santa Ines", coordenadas : [-39.81018358864245, -73.25714112071987],
+    {id: 21, nombre : "Parque Santa Ines", coordenadas : [-39.81018358864245, -73.25714112071987],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 1}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 23, nombre : "Cervecería Kunstamann", coordenadas : [-39.83748652098618, -73.2787712947148],
+    {id: 22, nombre : "Cervecería Kunstamann", coordenadas : [-39.83748652098618, -73.2787712947148],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 24, nombre : "Avda Matta 216", coordenadas : [-39.80605223357888, -73.21649343258606],
+    {id: 23, nombre : "Avda Matta 216", coordenadas : [-39.80605223357888, -73.21649343258606],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 1}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 25, nombre : "cecof Norte Grande", coordenadas : [-39.80629223784735, -73.22134648164848],
+    {id: 24, nombre : "cecof Norte Grande", coordenadas : [-39.80629223784735, -73.22134648164848],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 26, nombre : "Rademacher Weiss Norma - Italia 1761", coordenadas : [-39.833420789668544, -73.23860331952082],
+    {id: 25, nombre : "Rademacher Weiss Norma - Italia 1761", coordenadas : [-39.833420789668544, -73.23860331952082],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 27, nombre : "Arriendo Valdivia - Gabriela - Las Parras 2", coordenadas : [-39.85141293019937, -73.1950547781003],
+    {id: 26, nombre : "Arriendo Valdivia - Gabriela - Las Parras 2", coordenadas : [-39.85141293019937, -73.1950547781003],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 28, nombre : "Irlanda 1949-1901", coordenadas : [-39.83634285965833, -73.23999365680962],
+    {id: 27, nombre : "Irlanda 1949-1901", coordenadas : [-39.83634285965833, -73.23999365680962],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 29, nombre : "Los Venados Nte. 703-727", coordenadas : [-39.85006939152466, -73.2440151076109],
+    {id: 28, nombre : "Los Venados Nte. 703-727", coordenadas : [-39.85006939152466, -73.2440151076109],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 30, nombre : "Mirador Vapor Canelos - T-350", coordenadas : [-39.86025027343892, -73.34347571813547],
+    {id: 29, nombre : "Mirador Vapor Canelos - T-350", coordenadas : [-39.86025027343892, -73.34347571813547],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 31, nombre : "Robinson Ampuero Pérez 152-92", coordenadas : [-39.8537770566917, -73.24528190377413],
+    {id: 30, nombre : "Robinson Ampuero Pérez 152-92", coordenadas : [-39.8537770566917, -73.24528190377413],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 32, nombre : "Guillermo Frick 201-299", coordenadas : [-39.82457760053738, -73.24761674511498],
+    {id: 31, nombre : "Guillermo Frick 201-299", coordenadas : [-39.82457760053738, -73.24761674511498],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 33, nombre : "Altos del cruces", coordenadas : [-39.82492778795877, -73.27460080086854],
+    {id: 32, nombre : "Altos del cruces", coordenadas : [-39.82492778795877, -73.27460080086854],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 34, nombre : "Altos del cruces", coordenadas : [-39.82449120207287, -73.27735578009623],
+    {id: 33, nombre : "Altos del cruces", coordenadas : [-39.82449120207287, -73.27735578009623],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 35, nombre : "San Ignacio", coordenadas : [-39.830806167585074, -73.4017803514601],
+    {id: 34, nombre : "San Ignacio", coordenadas : [-39.830806167585074, -73.4017803514601],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 36, nombre : "Tornagaleones 180", coordenadas : [-39.86367529993661, -73.39324893275798],
+    {id: 35, nombre : "Tornagaleones 180", coordenadas : [-39.86367529993661, -73.39324893275798],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 37, nombre : "los 3 espinos", coordenadas : [-39.86276330150867, -73.36246166056425],
+    {id: 36, nombre : "los 3 espinos", coordenadas : [-39.86276330150867, -73.36246166056425],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 38, nombre : "C. Río Copiapó", coordenadas : [-39.793238665711144, -73.20156234123885],
+    {id: 37, nombre : "C. Río Copiapó", coordenadas : [-39.793238665711144, -73.20156234123885],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 39, nombre : "Condominio", coordenadas : [-39.79733615476746, -73.16613391646581],
+    {id: 38, nombre : "Condominio", coordenadas : [-39.79733615476746, -73.16613391646581],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 40, nombre : "Villa Rocura y Villa Masisa", coordenadas : [-39.808582522900835, -73.21488255883754],
+    {id: 39, nombre : "Villa Rocura y Villa Masisa", coordenadas : [-39.808582522900835, -73.21488255883754],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 41, nombre : "Humedal Angachilla", coordenadas : [-39.856216890630705, -73.23183931834382],
+    {id: 40, nombre : "Humedal Angachilla", coordenadas : [-39.856216890630705, -73.23183931834382],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 42, nombre : "T-352", coordenadas : [-39.842534269749336, -73.40377013869221],
+    {id: 41, nombre : "T-352", coordenadas : [-39.842534269749336, -73.40377013869221],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 43, nombre : "Niebla", coordenadas : [-39.875609929806494, -73.38783013635154],
+    {id: 42, nombre : "Niebla", coordenadas : [-39.875609929806494, -73.38783013635154],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 44, nombre : "Antilhue", coordenadas : [-39.805553632639246, -72.95885291420507],
+    {id: 43, nombre : "1 Campana de reciclaje pudú", coordenadas : [-39.83305783156415, -73.2112366900782],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 45, nombre : "1 Campana de reciclaje pudú", coordenadas : [-39.83305783156415, -73.2112366900782],
+    {id: 44, nombre : "condominio Fundo la Esperanza", coordenadas : [-39.857084990099295, -73.20853751829904],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
 
-    {id: 46, nombre : "condominio Fundo la Esperanza", coordenadas : [-39.857084990099295, -73.20853751829904],
-    tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 0}, {tipo : "papel/carton", estado : 0}, {tipo : "organico", estado : 0}]},
-
-    {id: 47, nombre : "Universidad austral de chile", coordenadas : [-39.832604, -73.252359],
+    {id: 45, nombre : "Universidad austral de chile", coordenadas : [-39.832604, -73.252359],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 1}, {tipo : "papel/carton", estado : 1}, {tipo : "organico", estado : 0}]},
 
 
