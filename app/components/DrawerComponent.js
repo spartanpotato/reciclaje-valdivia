@@ -40,7 +40,7 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
     <>
       <Drawer finalFocusRef={btnOpen} isOpen={isOpen} placement="right" onClose={onClose} size={"lg"}>
         <DrawerOverlay/>
-        <DrawerContent fontSize={"xl"} background={"green.100"}>
+        <DrawerContent className="Drawer" fontSize={"xl"} background={"green.100"}>
           <DrawerCloseButton />
 
           <DrawerHeader fontSize={"3xl"}>{currentValue.nombre}</DrawerHeader>

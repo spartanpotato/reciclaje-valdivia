@@ -79,6 +79,17 @@
   color: black;
 }
 
+.MenuButton{
+  z-index: 99;
+  margin-left: 2.5%;
+  margin-bottom: 0.5%;
+  margin-top: 0.5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color:#93DFA3;
+  color: black;
+}
+
 .checkboxLatas {
     margin-top: 1%;
     margin-bottom: 1%;
@@ -133,4 +144,8 @@
   background-color: white;
   margin-bottom: 1%;
   margin-top: 1%;
+}
+
+.Drawer{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }

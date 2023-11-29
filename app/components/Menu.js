@@ -28,7 +28,7 @@ function Menu_1( {data} ) {
     <>
         <Menu className="Menu" closeOnSelect={false}>
 
-            <MenuButton as={Button} className="Menu" colorScheme={"green"}>
+            <MenuButton as={Button} className="MenuButton" colorScheme={"green"}>
                 Filtros
             </MenuButton>
 
