@@ -1,6 +1,6 @@
 import React from "react";
 import ListItemComment from "@/app/components/Comentarios/ListItemComments";
-//Copiado del ejemplo
+
 const ListComments = ({ comentarios, idItem }) => {
     return (
     <>
