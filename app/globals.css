@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "stentiga";
+  src: url("../public/stentiga.otf");
+  font-style: bold;
+  font-weight: bold;
+}
+
 .navegacion {
   background-color: #d8f6d7; /* Color de fondo */
   background-image: url("../public/background.png");
@@ -31,15 +38,16 @@
 }
 
 .titulo{
-  color: #642251; /*troleito*/
-  font-size:2.5vw;
+  font-family: "stentiga";
+  color: #0a2d20; /*troleito*/
+  font-size:2.2vw;
 }
 
 .leyenda{
   color: #1f321e;
-  font-size: 1.5vw;
+  font-size: 1.38vw;
   margin-left: 5%;
-  font-family: 'Comic Sans MS', Comic Zanes, sans-serif;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
 .homeMap{
@@ -59,7 +67,7 @@
   margin-top: 0.5%;
   padding-left: 5%;
   padding-right: 5%;
-  background-color:#fcfcfc;
+  background-color:rgb(225, 243, 231);
   color: black;
 }
 
