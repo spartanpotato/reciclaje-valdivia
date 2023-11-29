@@ -2,15 +2,13 @@
 export default function Icons(tipos){
     var ImgURL = "./Icon/";
     var img = "";
-    tipos.map((patata)=>{
-        if(patata.estado==1){
-            if(patata.tipo == "papel/carton"){
-                img+="pc_"
-            }
-            else{
-                img+=patata.tipo.charAt(0)+"_";
-            }
+    var contador = 0;
+    const ids = ["v_","l_","p_","pc_","o_"];
+    tipos.map((elemento)=>{
+        if(elemento.estado){
+            img += ids[contador];
         }
+        contador += 1;
     })
     img = img.slice(0,-1)
     ImgURL+=img+".png";
