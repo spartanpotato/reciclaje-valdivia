@@ -1,5 +1,4 @@
-import Map from "@/app/components/Map"
-import Menu_1 from "./components/Menu";
+import Main from "./main_page.js";
 
 const fetchData = async ()=>{
   const response = await import("./api/puntos",{
@@ -13,7 +12,7 @@ export default async function Home() {
   const data = await fetchData();
   return (
       <div>
-        <Menu_1 data={data}/>
+        <Main data={data}/>
       </div>
   )
 }
