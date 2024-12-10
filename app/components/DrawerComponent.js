@@ -74,57 +74,46 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
           <DrawerHeader fontSize={"3xl"}>{currentValue.nombre}</DrawerHeader>
 
             <DrawerBody>
-            <DrawerHeader>
-              <Text fontSize="2xl" fontWeight="bold" mb={2} mt={2}>
-                Permite reciclar:
-              </Text>
-            </DrawerHeader>
+              <DrawerHeader>
+                <Text fontSize="2xl" fontWeight="bold" mb={2} mt={2}>
+                  Permite reciclar:
+                </Text>
+              </DrawerHeader>
 
-            <DrawerBody>
-              <UnorderedList>
-                {array.map((info) => {
-                  const state = info.estado;
-                  if (state === 1){
-                  return(
-                  <ListItem>{info.tipo}</ListItem>
-                  )}})}
-              </UnorderedList>
-            </DrawerBody>
+              <DrawerBody>
+                <UnorderedList>
+                  {array.map((info) => {
+                    const state = info.estado;
+                    if (state === 1){
+                    return(
+                    <ListItem>{info.tipo}</ListItem>
+                    )}})}
+                </UnorderedList>
+              </DrawerBody>
 
 
-            <DrawerHeader>
-              <Text fontSize="2xl" fontWeight="bold" mb={2} mt={4}>
-                Comentarios:
-              </Text>
-            </DrawerHeader>
+              <DrawerHeader>
+                <Text fontSize="2xl" fontWeight="bold" mb={2} mt={4}>
+                  Comentarios:
+                </Text>
+              </DrawerHeader>
 
-            <DrawerBody>
-              <CrearComentario
-                usuario={usuario}
-                setUsuario={setUsuario}
-                comentario={comentario}
-                setComentario={setComnetario}
-                idItem={currentValue.id}
-                enRespuestaA={enRespuestaA}
-                setEnRespuestaA={setEnRespuestaA}
-                cambio={cambio}
-                setCambio={setCambio}
-              />
-              <Box>
-                <ListComments comentarios={comentarios} />
-              </Box>   
-            </DrawerBody>
-            {/* <DrawerBody>
-              <CrearReporte
-                usuario={usuario}
-                setUsuario={setUsuario}
-                reporte={reporte}
-                setReporte={setReporte}
-                idItem={currentValue.id}
-                cambio={cambio}
-                setCambio={setCambio}
-              />
-            </DrawerBody> */}
+              <DrawerBody>
+                <CrearComentario
+                  usuario={usuario}
+                  setUsuario={setUsuario}
+                  comentario={comentario}
+                  setComentario={setComnetario}
+                  idItem={currentValue.id}
+                  enRespuestaA={enRespuestaA}
+                  setEnRespuestaA={setEnRespuestaA}
+                  cambio={cambio}
+                  setCambio={setCambio}
+                />
+                <Box>
+                <ListComments comentarios={comentarios} cambio={cambio} setCambio={setCambio} />
+                </Box>   
+              </DrawerBody>
 
             </DrawerBody>
 

@@ -9,6 +9,9 @@ import {
   Box, // Componente de contenedor flexible.
 } from "@chakra-ui/react";
 
+// Componente: Botón que permite hacer un reporte a un punto especifico
+
+
 const CrearReporte = ({
     usuario, // Usuario que está creando el reporte.
     setUsuario, // Actualiza el estado del nombre del usuario.
