@@ -3,18 +3,24 @@
 import { Box, Button, FormControl, FormLabel, Input, Heading, Text, Link, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation"; 
+import { useUserRole } from "@/app/providers/userRole";
 
 export default function SignIn() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const [userType, setUserType] = useState(null); 
+  const {userType, setUserType} = useUserRole();
   const router = useRouter();
 
   // Logica para ingreso
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Entrando como:", { user, password });
-    setUserType("user"); 
+    if(user === "admin"){
+      setUserType("admin");
+    }
+    else{
+      setUserType("user"); 
+    }
     router.push("/"); 
   };
 
