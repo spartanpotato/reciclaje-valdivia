@@ -1,4 +1,4 @@
-import Main from "./main_page.js";
+import Main from "@/app/components/main/page.js";
 
 const fetchData = async ()=>{
   const response = await import("./api/puntos",{

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Map from "@/app/components/Map";
-import Menu_1 from "./components/Menu";
+import Menu_1 from "@/app/components/Menu";
 
 function Main({ data }) {
     const [Vidrio, setVidrio] = useState(0);

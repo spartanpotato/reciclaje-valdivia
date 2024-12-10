@@ -1,8 +1,8 @@
 import "./globals.css";
 import Header from "@/app/components/Header";
 
-// Importamos "Providers": Nos dará acceso a los componentes de Chakra UI
 import { Providers } from "@/app/providers/provider";
+import { UserRoleProvider } from "@/app/providers/userRole";
 
 export const metadata = {
   title: "Reciclaje en Valdivia",
@@ -14,8 +14,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Providers>
-          <Header />
-          {children}
+          <UserRoleProvider>
+            <Header />
+            {children}
+          </UserRoleProvider>
         </Providers>
       </body>
     </html>

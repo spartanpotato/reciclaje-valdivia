@@ -1,7 +1,7 @@
 export default function Header() {
   return (
     <div className="navegacion">
-        <img src="reciclaje1.png" width="7%" height="7%"/> 
+        <img src="/reciclaje1.png" width="7%" height="7%"/> 
         <p className="titulo">Puntos de reciclaje en Valdivia</p>
         <div className="leyenda">
           <ul>
