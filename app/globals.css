@@ -136,11 +136,28 @@
   margin-top: 0.5%;
   padding-left: 5%;
   padding-right: 5%;
-  background-color:#93DFA3;
+  background-color:#52bf8c;
   color: black;
 }
 
 .CrearComentariosInput{
+  background-color: white;
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
+
+.CrearReportes{
+  z-index: 99;
+  margin-left: 2.5%;
+  margin-bottom: 0.5%;
+  margin-top: 0.5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color:#52bf8c;
+  color: black;
+}
+
+.ReportInput{
   background-color: white;
   margin-bottom: 1%;
   margin-top: 1%;
