@@ -137,7 +137,6 @@ export const puntos =[
     {id: 45, nombre : "Universidad austral de chile", coordenadas : [-39.832604, -73.252359],
     tipos : [{tipo : "vidrio", estado : 1}, {tipo : "latas", estado : 1}, {tipo : "plastico", estado : 1}, {tipo : "papel/carton", estado : 1}, {tipo : "organico", estado : 0}]},
 
-
     
 ];
 
