@@ -15,12 +15,14 @@ import { useState } from "react";
 import { useRouter } from "next/navigation"; 
 
 export default function SignUp() {
+  const [rut, setRut] = useState("");
   const [user, setUser] = useState("");
+  const [phoneNum, setPhoneNum] = useState();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
 
-  // Logica para registros
+  // Logica para registros temporal
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -30,6 +32,48 @@ export default function SignUp() {
     console.log("Registrando:", { username, password });
     router.push("/authentication/sign_in");
   };
+
+  // Logica para registros con api
+  /*const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+  
+    const newUser = {
+      rut,
+      nombre,
+      admin,
+      contrasena,
+      numerotelefono,
+    };
+  
+    try {
+      // Enviar data a api
+      const response = await fetch("http://172.233.25.94:PUERTO/usuarios", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
+      });
+  
+      // Recibir respuesta
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Usuario creado:", data);
+        router.push("/authentication/sign_in");
+      } else {
+        const errorData = await response.json();
+        alert(`Error: ${errorData.detail || "Algo salió mal"}`);
+      }
+    } catch (error) {
+      console.error("Error al crear usuario:", error);
+      alert("Error de conexión. Intenta nuevamente.");
+    }
+  };*/
+  
 
   return (
     <Box 
@@ -52,13 +96,33 @@ export default function SignUp() {
         </Heading>
         <form onSubmit={handleSubmit}>
           <VStack spacing={4}>
+            <FormControl id="rut" isRequired>
+              <FormLabel>Rut</FormLabel>
+              <Input 
+                type="text" 
+                value={rut} 
+                onChange={(e) => setRut(e.target.value)} 
+                placeholder="Rut" 
+                focusBorderColor="green.500"
+              />
+            </FormControl>
             <FormControl id="username" isRequired>
-              <FormLabel>Usuario</FormLabel>
+              <FormLabel>Nombre de usuario</FormLabel>
               <Input 
                 type="text" 
                 value={user} 
                 onChange={(e) => setUser(e.target.value)} 
                 placeholder="Nombre de usuario" 
+                focusBorderColor="green.500"
+              />
+            </FormControl>
+            <FormControl id="phoneNum" isRequired>
+              <FormLabel>numero de telefono</FormLabel>
+              <Input 
+                type="text" 
+                value={phoneNum} 
+                onChange={(e) => setPhoneNum(e.target.value)} 
+                placeholder="numero de telefono" 
                 focusBorderColor="green.500"
               />
             </FormControl>

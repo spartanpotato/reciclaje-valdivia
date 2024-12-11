@@ -11,7 +11,7 @@ export default function SignIn() {
   const {userType, setUserType} = useUserRole();
   const router = useRouter();
 
-  // Logica para ingreso
+  // Logica para ingreso temporal
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Entrando como:", { user, password });
@@ -23,6 +23,46 @@ export default function SignIn() {
     }
     router.push("/"); 
   };
+
+  // Logica de ingreso cuando este implementada la api
+  /*const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Entrando como:", { user, password });
+  
+    try {
+      // Enviar data a la api
+      const response = await fetch("http://172.233.25.94:PUERTO/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          rut: user,
+          contrasena: password,
+        }),
+      });
+  
+      // Recibir respuesta de la api
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.message);
+  
+        // Cambiar tipo de usuario si el login funciona
+        if (user === "admin") {
+          setUserType("admin");
+        } else {
+          setUserType("user");
+        }
+        router.push("/"); 
+      } else {
+        const errorData = await response.json();
+        console.error("Error de autenticación:", errorData.detail);
+      }
+    } catch (error) {
+      console.error("Error de conexión:", error.message);
+    }
+  };*/
+  
 
   // Logica para ignreso visita
   const handleGuestLogin = () => {
