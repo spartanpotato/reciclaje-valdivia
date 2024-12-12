@@ -5,18 +5,17 @@ from typing import Optional, List
 class DatosUsuario(BaseModel):
     rut: str
     nombre: Optional[str] = None
-    apellido: Optional[str] = None
     admin: Optional[bool] = None
+    contrasena: str
+    numero_telefono: Optional[str] = None
 
 # Esquema para "Usuario"
 class UsuarioBase(BaseModel):
     rut: str
     nombre: str
-    apellido: str
     admin: Optional[bool] = False
-
-class CreaUsuario(UsuarioBase):
-    pass
+    contrasena: str
+    numero_telefono: str
 
 class ObtieneUsuario(UsuarioBase):
     class Config:
@@ -42,7 +41,7 @@ class PuntoBase(BaseModel):
     coordy: float
     direccion: str
 
-class PuntoCreate(PuntoBase):
+class CreaPunto(PuntoBase):
     id_tipo: int
 
 class PuntoResponse(PuntoBase):
@@ -62,6 +61,21 @@ class ComentarioCreate(ComentarioBase):
 
 class ComentarioResponse(ComentarioBase):
     id_comentario: int
+    usuario: ObtieneUsuario
+    punto: PuntoResponse
+
+    class Config:
+        orm_mode = True
+
+
+# Esquema para Reporte
+class ReporteBase(BaseModel):
+    id_punto: int
+    id_usuario: str
+    detalles: str
+
+class ReporteResponse(ReporteBase):
+    id_reporte: int
     usuario: ObtieneUsuario
     punto: PuntoResponse
 

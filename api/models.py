@@ -50,3 +50,15 @@ class Comentario(Base):
 
     usuario = relationship("Usuario")
     punto = relationship("Punto")
+
+# Modelo para la tabla "reporte"
+class Reporte(Base):
+    __tablename__ = "reporte"
+
+    id_reporte = Column(Integer, primary_key=True, index=True)
+    id_punto = Column(Integer, ForeignKey("punto.id_punto"), nullable=False)
+    rut = Column(String, ForeignKey("usuario.rut"), nullable=False)
+    detalles = Column(String, nullable=False)
+
+    usuario = relationship("Usuario")
+    punto = relationship("Punto")
