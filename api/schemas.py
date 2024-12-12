@@ -17,7 +17,7 @@ class UsuarioBase(BaseModel):
     contrasena: str
     numero_telefono: str
 
-class ObtieneUsuario(UsuarioBase):
+class UsuarioResponse(UsuarioBase):
     class Config:
         orm_mode = True
 
@@ -61,7 +61,7 @@ class ComentarioCreate(ComentarioBase):
 
 class ComentarioResponse(ComentarioBase):
     id_comentario: int
-    usuario: ObtieneUsuario
+    usuario: UsuarioResponse
     punto: PuntoResponse
 
     class Config:
@@ -76,7 +76,7 @@ class ReporteBase(BaseModel):
 
 class ReporteResponse(ReporteBase):
     id_reporte: int
-    usuario: ObtieneUsuario
+    usuario: UsuarioResponse
     punto: PuntoResponse
 
     class Config:
