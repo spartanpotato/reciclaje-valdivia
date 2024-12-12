@@ -2,15 +2,8 @@ from typing import List
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from .database import Base, engine
-from .models import Usuario, Tipo, Punto, Comentario
+from . import models, schemas
 from .dependencies import get_db
-from .schemas import (
-    CreaUsuario, ObtieneUsuario,
-    TipoBase, TipoResponse,
-    CreaPunto, PuntoResponse,
-    ComentarioCreate, ComentarioResponse,
-    DatosUsuario
-)
 
 app = FastAPI()
 
