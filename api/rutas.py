@@ -1,10 +1,10 @@
 from typing import Optional, List
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from .database import Base, engine
-from .models import Usuario, Punto, Comentario, Reporte
-from .schemas import DatosUsuario, UsuarioResponse, CreaPunto, PuntoResponse, ComentarioCreate, ComentarioResponse, ReporteCreate, ReporteResponse
-from .dependencies import get_db
+from api.database import Base, engine
+from api.models import Usuario, Punto, Comentario, Reporte
+from api.schemas import DatosUsuario, UsuarioResponse, CreaPunto, PuntoResponse, ComentarioCreate, ComentarioResponse, ReporteCreate, ReporteResponse
+from api.dependencies import get_db
 
 app = FastAPI()
 
