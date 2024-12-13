@@ -5,8 +5,18 @@ from api.database import Base, engine
 from api.models import Usuario, Punto, Comentario, Reporte
 from api.schemas import DatosUsuario, UsuarioResponse, CreaPunto, PuntoResponse, ComentarioCreate, ComentarioResponse, ReporteResponse, ReporteCreate
 from api.dependencies import get_db
+from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://172.233.25.94:3000"],  # Add the frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 # Crear tablas en la base de datos
 Base.metadata.create_all(bind=engine)
