@@ -6,6 +6,7 @@ import {
   MenuList, // Lista de elementos del menú.
   Box, // Componente de contenedor flexible.
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { useUserRole } from "@/app/providers/userRole";
 // Componente: Botón que permite hacer un reporte a un punto especifico
 
@@ -13,10 +14,10 @@ const BorrarComentario = ({
     usuario, // Usuario que creo el comentario.
     comentario, // Comentario a eliminar
     idItem, // Punto de reciclaje al que está asociado el reporte.
-    cambio, // Indicador booleano que se utiliza para forzar la actualización del componente.
-    setCambio, // Función que se utiliza para actualizar el estado cambio.
   }) => { 
     const {userType} = useUserRole(); // Obtener el userType del contexto
+    const [cambio, setCambio] = useState(false); // Indicador booleano que se utiliza para forzar la actualización del componente.
+
     // Función simulada para enviar la solicitud (TEMPORAL)
     const sendRequest = async () => {
         // Simula el envío de la solicitud sin hacer nada

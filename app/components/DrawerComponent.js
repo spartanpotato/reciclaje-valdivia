@@ -19,6 +19,9 @@ import ListComments from "./Comentarios/ListComments";
 import CrearComentario from "./Comentarios/CrearComentario";
 import { useState,useEffect } from "react";
 import CrearReporte from "./Reporte/CrearReporte";
+import EditarPunto from "./puntos/EditarPunto";
+
+// Componente : Sidebar en el mapa al apretar un punto
 
 // Define el componente DrawerComponent y su estado utilizando:
 // useState =  un hook de React que permite añadir estado a un componente funcional.
@@ -31,9 +34,7 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
   const [comentarios, setComentarios] = useState([]); 
   const [usuario, setUsuario] = useState("");
   const [comentario, setComnetario] = useState("");
-  const [enRespuestaA, setEnRespuestaA] = useState("");
   const [cambio, setCambio] = useState(true);
-  const [reporte, setReporte] = useState("");
   const { btnOpen } = useRef();
   console.log(currentValue);
 
@@ -71,7 +72,13 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
         <DrawerContent className="Drawer" fontSize={"xl"} background={"green.100"}>
           <DrawerCloseButton />
 
-          <DrawerHeader fontSize={"3xl"}>{currentValue.nombre}</DrawerHeader>
+          <DrawerHeader fontSize={"3xl"}>
+                {currentValue.nombre}                
+                <EditarPunto 
+                  admin={usuario}
+                  item={currentValue}
+                />
+          </DrawerHeader>
 
             <DrawerBody>
               <DrawerHeader>
@@ -79,7 +86,6 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
                   Permite reciclar:
                 </Text>
               </DrawerHeader>
-
               <DrawerBody>
                 <UnorderedList>
                   {array.map((info) => {
@@ -105,8 +111,6 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
                   comentario={comentario}
                   setComentario={setComnetario}
                   idItem={currentValue.id}
-                  enRespuestaA={enRespuestaA}
-                  setEnRespuestaA={setEnRespuestaA}
                   cambio={cambio}
                   setCambio={setCambio}
                 />
@@ -122,11 +126,7 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
               <CrearReporte
                   usuario={usuario}
                   setUsuario={setUsuario}
-                  reporte={reporte}
-                  setReporte={setReporte}
                   idItem={currentValue.id}
-                  cambio={cambio}
-                  setCambio={setCambio}
                 />
               <Button variant="solid" size={"lg"} mr={3} onClick={onClose}>
                 Volver

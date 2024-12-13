@@ -1,8 +1,8 @@
 "use client";
 import "@/app/globals.css";
 import { Box, Text } from "@chakra-ui/react";
-import BorrarComentario from "./borrarComentario";
-const ListItemComment = ({ comentario, cambio, setCambio}) => {
+import BorrarComentario from "./BorrarComentario";
+const ListItemComment = ({ comentario }) => {
   const {comentario: comment, usuario, idItem} = comentario;
 
   return (
@@ -21,13 +21,11 @@ const ListItemComment = ({ comentario, cambio, setCambio}) => {
           {comment}
         </Text>
       </Box>
-        <BorrarComentario>
+        <BorrarComentario
           usuario={usuario}
           comentario={comment}
           idItem={idItem}
-          cambio={cambio}
-          setCambio={setCambio}
-        </BorrarComentario>
+        />
     </Box>
   );
 };

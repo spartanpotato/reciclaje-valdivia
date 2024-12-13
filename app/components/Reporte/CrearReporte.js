@@ -7,20 +7,20 @@ import {
   MenuButton, // Botón que activa el menú.
   MenuList, // Lista de elementos del menú.
   Box, // Componente de contenedor flexible.
+  useDisclosure 
 } from "@chakra-ui/react";
-
+import { useState } from "react";
 // Componente: Botón que permite hacer un reporte a un punto especifico
 
 
 const CrearReporte = ({
     usuario, // Usuario que está creando el reporte.
     setUsuario, // Actualiza el estado del nombre del usuario.
-    reporte, // Texto del reporte.
-    setReporte, // Actualiza el estado del texto del reporte.
     idItem, // Punto de reciclaje al que está asociado el reporte.
-    cambio, // Indicador booleano que se utiliza para forzar la actualización del componente.
-    setCambio, // Función que se utiliza para actualizar el estado cambio.
   }) => { 
+    const [reporte, setReporte] = useState("");
+    const [cambio, setCambio] = useState(false); 
+    const { isOpen, onOpen, onClose } = useDisclosure(); // Controlar la apertura y cierre del menú
 
     // Función simulada para enviar la solicitud (TEMPORAL)
     const sendRequest = async () => {
@@ -29,6 +29,7 @@ const CrearReporte = ({
         console.log("Usuario:", usuario);
         console.log("Reporte:", reporte);
         console.log("ID del ítem:", idItem);
+        onClose();
         alert("Comentario procesado localmente (no enviado)");
     };
 
@@ -44,8 +45,8 @@ const CrearReporte = ({
     // OBS: xs (extra small), sm (small), md (medium), lg (large), y xl (extra large).
     return (
         <>
-          <Menu size={"md"}>
-            <MenuButton as={Button} mb={4} color="#b81052">
+          <Menu isOpen={isOpen} onClose={onClose} size={"md"}>
+            <MenuButton onClick={onOpen} as={Button} mb={4} color="#b81052">
             Reportar
             </MenuButton>
             

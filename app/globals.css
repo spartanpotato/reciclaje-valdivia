@@ -84,8 +84,8 @@
   margin-left: 2.5%;
   margin-bottom: 0.5%;
   margin-top: 0.5%;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 4%;
+  padding-right: 4%;
   background-color:#93DFA3;
   color: black;
 }
@@ -162,7 +162,84 @@
   margin-bottom: 1%;
   margin-top: 1%;
 }
+.EditarPunto{
+  z-index: 99;
+  margin-left: 2.5%;
+  margin-bottom: 0.5%;
+  margin-top: 0.5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color:#52bf8c;
+  color: black;
+}
+
+.EditarButton{
+  z-index: 50;
+  margin-left: 2%;
+  margin-bottom: 0.5%;
+  margin-top: 0.5%;
+  padding-left: 2%;
+  padding-right: 2%;
+  color: black;
+}
+
+.inputEditar{
+  background-color: white;
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
 
 .Drawer{
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  margin-left: -10px; 
+  font-size: 25px; 
+  font-weight: 300; 
+}
+
+.checkboxLabel input {
+  margin-right: 10px; 
+}
+
+.ProponerPunto{
+  z-index: 99;
+  margin-left: 2.5%;
+  margin-bottom: 0.5%;
+  margin-top: 0.5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color:#52bf8c;
+  color: black;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.PropButton{
+  z-index: 99;
+  margin-left: 2.5%;
+  margin-bottom: 0.5%;
+  margin-top: 0.5%;
+  padding-left: 2%;
+  padding-right: 2%;
+  background-color:#93DFA3;
+  color: black;
+}
+
+.inputProponer{
+  background-color: white;
+  margin-bottom: 1%;
+  margin-top: 1%;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* .mapContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 85vh; 
+  margin: 0 auto;
+} */
