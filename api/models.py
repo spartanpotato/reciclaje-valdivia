@@ -8,7 +8,6 @@ class Usuario(Base):
 
     rut = Column(String, primary_key=True, index=True)
     nombre = Column(String)
-    apellido = Column(String)
     contrasena = Column(String, nullable=False)
     admin = Column(Boolean, default=False)
     numerotelefono = Column(String, nullable=False)
