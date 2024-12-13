@@ -235,11 +235,11 @@
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-/* .mapContainer {
+.mapContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 85vh; 
   margin: 0 auto;
-} */
+}

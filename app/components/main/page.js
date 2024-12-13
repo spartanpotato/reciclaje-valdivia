@@ -28,9 +28,9 @@ function Main({ data }) {
                 Papel_Carton={Papel_Carton} setPapel_Carton={setPapel_Carton}
                 Organico={Organico} setOrganico={setOrganico}
             />
-            {/* <div className="mapContainer"> */}
-            <Map data={data} tipos={tipos_1} />
-            {/* </div> */}
+            <div className="mapContainer">
+                <Map data={data} tipos={tipos_1} />
+            </div>
         </div>
     );
 }
