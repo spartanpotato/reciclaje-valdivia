@@ -74,6 +74,9 @@ class ReporteBase(BaseModel):
     id_usuario: str
     detalles: str
 
+class ReporteCreate(ReporteBase):
+    pass
+
 class ReporteResponse(ReporteBase):
     id_reporte: int
     usuario: UsuarioResponse
