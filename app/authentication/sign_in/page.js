@@ -10,7 +10,7 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const {userType, setUserType} = useUserRole();
   const router = useRouter();
-
+  /*
   // Logica para ingreso temporal
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,9 +23,9 @@ export default function SignIn() {
     }
     router.push("/"); 
   };
-
+  */
   // Logica de ingreso cuando este implementada la api
-  /*const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Entrando como:", { user, password });
   
@@ -61,7 +61,7 @@ export default function SignIn() {
     } catch (error) {
       console.error("Error de conexión:", error.message);
     }
-  };*/
+  };
   
 
   // Logica para ignreso visita
