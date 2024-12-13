@@ -31,7 +31,7 @@ export default function SignIn() {
   
     try {
       // Enviar data a la api
-      const response = await fetch("http://127.0.0.1:54321/login", {
+      const response = await fetch("http://172.233.25.94:54321/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

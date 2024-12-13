@@ -51,7 +51,7 @@ export default function SignUp() {
   
     try {
       // Enviar data a api
-      const response = await fetch("http://172.233.25.94:PUERTO/usuarios", {
+      const response = await fetch("http://172.233.25.94:54321/usuarios", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
