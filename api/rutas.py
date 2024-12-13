@@ -39,7 +39,7 @@ async def login(user_request: DatosUsuario, db: Session = Depends(get_db)):
     user = db.query(Usuario).filter(Usuario.rut == user_request.rut).first()
     if not user:
         raise HTTPException(status_code=401, detail="Credenciales inválidas")
-    return {"message": f"Bienvenido {user.nombre} {user.apellido}"}
+    return {"message": f"Bienvenido {user.nombre}"}
 
 # Añade un usuario a la base de datos
 @app.post("/usuarios", response_model=UsuarioResponse)
