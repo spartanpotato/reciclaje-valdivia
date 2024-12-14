@@ -62,7 +62,6 @@ const CrearReporte = ({
     const handleSubmit = async (e) => {
         e.preventDefault();
         await sendRequest(); // Llama a la función simulada
-        setUsuario(""); // Limpia el campo de usuario
         setReporte(""); // Limpia el campo del reporte
         setCambio(() => !cambio); // Invierte el valor de cambio para forzar una actualización
     };
@@ -84,7 +83,7 @@ const CrearReporte = ({
                         <Input // Sección donde se ingresa el nombre del usuario que hace el reporte
                             className="ReportInput" 
                             placeholder="Usuario" 
-                            value={usuario}
+                            value={userType}
                             readOnly 
                         />
                         <Textarea // Area donde se ingresa el texto del reporte
