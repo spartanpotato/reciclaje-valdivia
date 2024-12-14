@@ -44,11 +44,11 @@ export default function SignUp() {
     }
   
     const newUser = {
-      rut,
-      nombre,
-      admin,
-      contrasena,
-      numerotelefono,
+      rut: rut,
+      nombre: user,
+      admin: false,
+      contrasena: password,
+      numerotelefono: phoneNum,
     };
   
     try {
