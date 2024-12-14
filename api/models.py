@@ -29,8 +29,8 @@ class Punto(Base):
 
     id_punto = Column(Integer, primary_key=True, index=True)
     id_tipo = Column(Integer, ForeignKey("tipo.id_tipo"))
-    coordx = Column(Float, nullable=False)
-    coordy = Column(Float, nullable=False)
+    coordx = Column(String, nullable=False)
+    coordy = Column(String, nullable=False)
     direccion = Column(String, nullable=False)
 
     tipo = relationship("Tipo", back_populates="puntos")
