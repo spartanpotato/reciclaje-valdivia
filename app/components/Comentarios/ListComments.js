@@ -6,7 +6,7 @@ const ListComments = ({ comentarios }) => {
     <>
       {comentarios.map((comentario) => (
         <ListItemComment 
-          key={comentario._id} 
+          key={comentario.id_comentario} 
           comentario={comentario} 
         />
       ))}

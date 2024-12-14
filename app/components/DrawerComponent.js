@@ -43,12 +43,20 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
   // Aquí se usa para obtener datos cuando cambio o currentValue cambian.
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/api/peticionGetIdApp?idApp=Reciclaje&idItem=" + currentValue.id);
-      const data = await response.json();
-      setComentarios(data);
+      try {
+        // Fetch comments for the current point
+        const response = await fetch(`http://172.233.25.94:54321/comentarios/${currentValue.id}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data = await response.json();
+        setComentarios(data);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      }
     };
     fetchData();
-  }, [cambio,currentValue]);
+  }, [cambio, currentValue]);
 
   // define la estructura y el contenido del componente DrawerComponent, que es una sideBar (drawer).
   // <Drawer> :  Componente principal del sideBar
