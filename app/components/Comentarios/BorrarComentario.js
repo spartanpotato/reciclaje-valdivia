@@ -18,7 +18,38 @@ const BorrarComentario = ({
     const {userType} = useUserRole(); // Obtener el userType del contexto
     const [cambio, setCambio] = useState(false); // Indicador booleano que se utiliza para forzar la actualización del componente.
 
-    // Función simulada para enviar la solicitud (TEMPORAL)
+
+    // Función para enviar la solicitud DELETE a la API
+    // const sendRequest = async () => {
+    //   try {
+    //     const response = await fetch(`http://172.233.25.94:54321/comentarios/${idComentario}`, {
+    //       method: "DELETE",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     });
+
+    //     if (response.ok) {
+    //       console.log("Comentario eliminado");
+    //       alert("Comentario eliminado exitosamente");
+    //     } else {
+    //       const errorData = await response.json();
+    //       alert(`Error: ${errorData.detail || "Algo salió mal"}`);
+    //     }
+    //   } catch (error) {
+    //     console.error("Error en la solicitud:", error);
+    //     alert("Error en la solicitud");
+    //   }
+    // };
+
+    // // Función para manejar el envío del formulario
+    // const handleSubmit = async (e) => {
+    //   e.preventDefault();
+    //   await sendRequest(); // Llama a la función para enviar la solicitud DELETE
+    //   // setCambio(() => !cambio); // Invierte el valor de cambio para forzar una actualización
+    // };
+
+        // Función simulada para enviar la solicitud (TEMPORAL)
     const sendRequest = async () => {
         // Simula el envío de la solicitud sin hacer nada
         console.log("Se eliminará:");
@@ -27,6 +58,7 @@ const BorrarComentario = ({
         console.log("ID del ítem:", idItem);
         alert("Comentario 'eliminado' localmente (no enviado)");
     };
+    
 
     // Función para manejar el envío del formulario (TEMPORAL)
     const handleSubmit = async (e) => {
@@ -34,12 +66,10 @@ const BorrarComentario = ({
         await sendRequest(); // Llama a la función simulada
         // setCambio(() => !cambio); // Invierte el valor de cambio para forzar una actualización
     };
-
-      // Renderizar el botón solo si el userType es "admin"
+    // Renderizar el botón solo si el userType es "admin"
     if (userType !== "admin") {
-        return null;
+      return null;
     }
-    
     // OBS: xs (extra small), sm (small), md (medium), lg (large), y xl (extra large).
     return (
         <>
@@ -62,3 +92,4 @@ const BorrarComentario = ({
     };
 
 export default BorrarComentario;
+

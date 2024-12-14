@@ -15,23 +15,47 @@ import { useState } from "react";
 
 const CrearReporte = ({
     usuario, // Usuario que está creando el reporte.
-    setUsuario, // Actualiza el estado del nombre del usuario.
     idItem, // Punto de reciclaje al que está asociado el reporte.
   }) => { 
     const [reporte, setReporte] = useState("");
     const [cambio, setCambio] = useState(false); 
     const { isOpen, onOpen, onClose } = useDisclosure(); // Controlar la apertura y cierre del menú
 
-    // Función simulada para enviar la solicitud (TEMPORAL)
-    const sendRequest = async () => {
-        // Simula el envío de la solicitud sin hacer nada
-        console.log("Datos ingresados:");
-        console.log("Usuario:", usuario);
-        console.log("Reporte:", reporte);
-        console.log("ID del ítem:", idItem);
+      // Función para enviar la solicitud POST a la API
+  const sendRequest = async () => {
+    try {
+      const response = await fetch(`http://172.233.25.94:54321/reportes/${idItem}/${usuario}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ reporte }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Reporte creado:", data);
+        alert("Reporte creado exitosamente");
         onClose();
-        alert("Comentario procesado localmente (no enviado)");
-    };
+      } else {
+        const errorData = await response.json();
+        alert(`Error: ${errorData.detail || "Algo salió mal"}`);
+      }
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
+      alert("Error en la solicitud");
+    }
+  };
+    // // Función simulada para enviar la solicitud (TEMPORAL)
+    // const sendRequest = async () => {
+    //     // Simula el envío de la solicitud sin hacer nada
+    //     console.log("Datos ingresados:");
+    //     console.log("Usuario:", usuario);
+    //     console.log("Reporte:", reporte);
+    //     console.log("ID del ítem:", idItem);
+    //     onClose();
+    //     alert("Comentario procesado localmente (no enviado)");
+    // };
 
     // Función para manejar el envío del formulario (TEMPORAL)
     const handleSubmit = async (e) => {
@@ -56,7 +80,8 @@ const CrearReporte = ({
                         <Input // Sección donde se ingresa el nombre del usuario que hace el reporte
                             className="ReportInput" 
                             placeholder="Usuario" 
-                            value={usuario} onChange={(e) => setUsuario(e.target.value)} 
+                            value={usuario}
+                            readOnly 
                         />
                         <Textarea // Area donde se ingresa el texto del reporte
                             className="ReportInput" 

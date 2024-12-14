@@ -125,7 +125,6 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
             <Flex justify="space-between" width="100%">
               <CrearReporte
                   usuario={usuario}
-                  setUsuario={setUsuario}
                   idItem={currentValue.id}
                 />
               <Button variant="solid" size={"lg"} mr={3} onClick={onClose}>
