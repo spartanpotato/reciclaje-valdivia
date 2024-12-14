@@ -108,7 +108,7 @@ async def get_comentarios(id_punto: int, db: Session = Depends(get_db)):
 @app.post("/comentarios", response_model=ComentarioResponse)
 async def crear_comentario(comentario: ComentarioCreate, db: Session = Depends(get_db)):
     # Crear el nuevo comentario
-    nuevo_comentario = Comentario(**comentario.dict())
+    nuevo_comentario = Comentario(**comentario.model_dump())
     db.add(nuevo_comentario)
     db.commit()
     db.refresh(nuevo_comentario)
