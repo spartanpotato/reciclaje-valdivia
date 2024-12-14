@@ -7,7 +7,7 @@ class DatosUsuario(BaseModel):
     nombre: Optional[str] = None
     admin: Optional[bool] = None
     contrasena: str
-    numero_telefono: Optional[str] = None
+    numerotelefono: Optional[str] = None
 
 # Esquema para "Usuario"
 class UsuarioBase(BaseModel):
@@ -15,7 +15,7 @@ class UsuarioBase(BaseModel):
     nombre: str
     admin: Optional[bool] = False
     contrasena: str
-    numero_telefono: str
+    numerotelefono: str
 
 class UsuarioResponse(UsuarioBase):
     class Config:
