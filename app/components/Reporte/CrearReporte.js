@@ -10,21 +10,22 @@ import {
   useDisclosure 
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useUserRole } from "@/app/providers/userRole";
 // Componente: Botón que permite hacer un reporte a un punto especifico
 
 
 const CrearReporte = ({
-    usuario, // Usuario que está creando el reporte.
+    // usuario, Usuario que está creando el reporte.
     idItem, // Punto de reciclaje al que está asociado el reporte.
   }) => { 
     const [reporte, setReporte] = useState("");
     const [cambio, setCambio] = useState(false); 
     const { isOpen, onOpen, onClose } = useDisclosure(); // Controlar la apertura y cierre del menú
-
+    const {userType} = useUserRole(); // Obtener el userType del contexto
       // Función para enviar la solicitud POST a la API
   const sendRequest = async () => {
     try {
-      const response = await fetch(`http://172.233.25.94:54321/reportes/${idItem}/${usuario}`, {
+      const response = await fetch(`http://172.233.25.94:54321/reportes/${idItem}/${userType}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,6 +67,9 @@ const CrearReporte = ({
         setCambio(() => !cambio); // Invierte el valor de cambio para forzar una actualización
     };
 
+    if (userType !== "guest") {
+      return null;
+    }
     // OBS: xs (extra small), sm (small), md (medium), lg (large), y xl (extra large).
     return (
         <>
