@@ -24,7 +24,7 @@ const CrearComentario = ({
 
   const sendRequest = async () => {
     try {
-      const response = await fetch(`http://172.233.25.94:54321/comentarios/${userRut}`, {
+      const response = await fetch(`http://172.233.25.94:54321/comentarios`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

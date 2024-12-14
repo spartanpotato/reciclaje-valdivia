@@ -104,9 +104,9 @@ async def get_comentarios(id_punto: int, db: Session = Depends(get_db)):
     return comentarios
 
 # Añade un comentario a la base de datos dado el ID del usuario
-@app.post("/comentarios/{id_usuario}", response_model=ComentarioResponse)
-async def crear_comentario(id_usuario: str, comentario: ComentarioCreate, db: Session = Depends(get_db)):
-    nuevo_comentario = Comentario(**comentario.model_dump(), rut=id_usuario)
+@app.post("/comentarios", response_model=ComentarioResponse)
+async def crear_comentario(comentario: ComentarioCreate, db: Session = Depends(get_db)):
+    nuevo_comentario = Comentario(**comentario.model_dump())
     db.add(nuevo_comentario)
     db.commit()
     db.refresh(nuevo_comentario)
