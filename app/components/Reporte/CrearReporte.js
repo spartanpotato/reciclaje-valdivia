@@ -24,30 +24,31 @@ const CrearReporte = ({
     const { isOpen, onOpen, onClose } = useDisclosure(); // Controlar la apertura y cierre del menú
     const {userType} = useUserRole(); // Obtener el userType del contexto
       // Función para enviar la solicitud POST a la API
-  const sendRequest = async () => {
-    try {
-      const response = await fetch(`http://172.233.25.94:54321/reportes/${idItem}/${user}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ reporte }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Reporte creado:", data);
-        alert("Reporte creado exitosamente");
-        onClose();
-      } else {
-        const errorData = await response.json();
-        alert(`Error: ${errorData.detail || "Algo salió mal"}`);
+    const sendRequest = async () => {
+      try {
+        const response = await fetch(`http://172.233.25.94:54321/reportes/${idItem}/${user}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ reporte }),
+        });
+    
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Reporte creado:", data);
+          alert("Reporte creado exitosamente");
+          onClose();
+        } else {
+          const errorData = await response.json();
+          console.error("Error en la solicitud:", errorData);
+          alert(`Error: ${errorData.detail || "Algo salió mal"}`);
+        }
+      } catch (error) {
+        console.error("Error en la solicitud:", error);
+        alert(`Error en la solicitud: ${error.message}`);
       }
-    } catch (error) {
-      console.error("Error en la solicitud:", error);
-      alert("Error en la solicitud");
-    }
-  };
+    };
     // // Función simulada para enviar la solicitud (TEMPORAL)
     // const sendRequest = async () => {
     //     // Simula el envío de la solicitud sin hacer nada
