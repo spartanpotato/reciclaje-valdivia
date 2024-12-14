@@ -22,6 +22,7 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const router = useRouter();
 
+  /*
   // Logica para registros temporal
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,9 +33,10 @@ export default function SignUp() {
     console.log("Registrando:", { username, password });
     router.push("/authentication/sign_in");
   };
+  */
 
   // Logica para registros con api
-  /*const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("Las contraseñas no coinciden");
@@ -72,7 +74,7 @@ export default function SignUp() {
       console.error("Error al crear usuario:", error);
       alert("Error de conexión. Intenta nuevamente.");
     }
-  };*/
+  };
   
 
   return (
@@ -117,7 +119,7 @@ export default function SignUp() {
               />
             </FormControl>
             <FormControl id="phoneNum" isRequired>
-              <FormLabel>numero de telefono</FormLabel>
+              <FormLabel>Numero de telefono</FormLabel>
               <Input 
                 type="text" 
                 value={phoneNum} 
