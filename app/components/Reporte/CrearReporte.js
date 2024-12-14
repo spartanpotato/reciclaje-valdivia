@@ -42,11 +42,11 @@ const CrearReporte = ({
         } else {
           const errorData = await response.json();
           console.error("Error en la solicitud:", errorData);
-          alert(`Error: ${errorData.detail || "Algo salió mal"}`);
+          alert(`Error: ${JSON.stringify(errorData.detail) || "Algo salió mal"}`);
         }
       } catch (error) {
         console.error("Error en la solicitud:", error);
-        alert(`Error en la solicitud: ${error.message}`);
+        alert(`Error en la solicitud: ${JSON.stringify(error.message)}`);
       }
     };
     // // Función simulada para enviar la solicitud (TEMPORAL)
@@ -69,7 +69,7 @@ const CrearReporte = ({
         setCambio(() => !cambio); // Invierte el valor de cambio para forzar una actualización
     };
 
-    if (userType == "guest") {
+    if (userType == "guest" || userType == null) {
       return null;
     }
     // OBS: xs (extra small), sm (small), md (medium), lg (large), y xl (extra large).
