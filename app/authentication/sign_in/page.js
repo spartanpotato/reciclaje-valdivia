@@ -48,7 +48,7 @@ export default function SignIn() {
         console.log(data.message);
   
         // Cambiar tipo de usuario si el login funciona
-        if (user === "admin") {
+        if (data.admin == true) {
           setUserType("admin");
           localStorage.setItem("isAdmin","true");
         } else {
@@ -95,7 +95,7 @@ export default function SignIn() {
         <form onSubmit={handleSubmit}>
           <VStack spacing={4}>
             <FormControl id="user" isRequired>
-              <FormLabel>Usuario</FormLabel>
+              <FormLabel>Rut usuario</FormLabel>
               <Input 
                 type="text" 
                 value={user} 
