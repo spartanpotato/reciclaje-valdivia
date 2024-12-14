@@ -71,7 +71,7 @@ class ComentarioResponse(ComentarioBase):
 # Esquema para Reporte
 class ReporteBase(BaseModel):
     id_punto: int
-    id_usuario: str
+    user: str
     detalles: str
 
 class ReporteCreate(ReporteBase):
@@ -79,7 +79,7 @@ class ReporteCreate(ReporteBase):
 
 class ReporteResponse(ReporteBase):
     id_reporte: int
-    usuario: UsuarioResponse
+    user: UsuarioResponse
     punto: PuntoResponse
 
     class Config:

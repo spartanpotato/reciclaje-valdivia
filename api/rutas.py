@@ -126,9 +126,9 @@ async def delete_comentario(id_comentario: int, db: Session = Depends(get_db)):
 """REPORTES"""
 
 #  Añade un reporte a la base de datos
-@app.post("/reportes/{id_punto}/{id_usuario}", response_model=ReporteResponse)
-async def crear_reporte(id_punto: int, id_usuario: str, reporte: ReporteCreate, db: Session = Depends(get_db)):
-    nuevo_reporte = Reporte(**reporte.model_dump(), id_punto=id_punto, rut=id_usuario)
+@app.post("/reportes", response_model=ReporteResponse)
+async def crear_reporte(reporte: ReporteCreate, db: Session = Depends(get_db)):
+    nuevo_reporte = Reporte(**reporte.model_dump())
     db.add(nuevo_reporte)
     db.commit()
     db.refresh(nuevo_reporte)
