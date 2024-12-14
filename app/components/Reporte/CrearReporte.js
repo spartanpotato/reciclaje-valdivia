@@ -67,7 +67,7 @@ const CrearReporte = ({
         setCambio(() => !cambio); // Invierte el valor de cambio para forzar una actualización
     };
 
-    if (userType !== "guest") {
+    if (userType == "guest") {
       return null;
     }
     // OBS: xs (extra small), sm (small), md (medium), lg (large), y xl (extra large).
