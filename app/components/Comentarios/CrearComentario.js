@@ -1,4 +1,5 @@
 import "@/app/globals.css";
+import { useUserRole } from "@app/providers/UserRole";
 import { 
   Input,
   Button, 
@@ -12,7 +13,6 @@ import {
 
 const CrearComentario = ({
   usuario,
-  setUsuario,
   comentario,
   setComentario,
   idItem,
@@ -20,28 +20,39 @@ const CrearComentario = ({
   setCambio,
 }) => {
 
-  const sendRequest = async () => {
-    const response = await fetch("/api/peticionPost", {
-      method: "POST",
-      body: JSON.stringify({
-        usuario: usuario,
-        idApp: "Reciclaje",
-        idItem: idItem,
-        comentario: comentario,
-        timestamp: Date.now(),
-        enRespuestaA: null
-      }),
-    });
+  const { userName, userRut } = useUserRole();
 
-    const data = await response.json();
-    console.log(data);
-    alert("Comentario creado");
+  const sendRequest = async () => {
+    try {
+      const response = await fetch(`http://172.233.25.94:54321/comentarios/${userRut}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          rut: userRut, // ID of the user creating the comment
+          id_punto: idItem, // ID of the point where the comment is being added
+          detalles: comentario, // The actual comment
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create comment");
+      }
+
+      const data = await response.json();
+      console.log("Comentario creado:", data);
+      alert("Comentario creado exitosamente");
+    } catch (error) {
+      console.error("Error al crear el comentario:", error);
+      alert("Hubo un error al crear el comentario");
+    }
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     sendRequest();
-    setUsuario("");
     setComentario("");
     setCambio(() => (!cambio));
   };
@@ -56,7 +67,6 @@ const CrearComentario = ({
         <MenuList className="CrearComentarios">
           <form onSubmit={handleSubmit}>
             <Box textAlign={"center"}>
-            <Input className="CrearComentariosInput" placeholder="Usuario" value={usuario} onChange={(e) => setUsuario(e.target.value)} />
             <Textarea className="CrearComentariosInput" placeholder="Comentario" value={comentario} onChange={(e) => setComentario(e.target.value)} />
             <Button type="submit">Crear</Button>
             </Box>

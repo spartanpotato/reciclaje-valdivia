@@ -8,7 +8,7 @@ import { useUserRole } from "@/app/providers/userRole";
 export default function SignIn() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const {userType, setUserType} = useUserRole();
+  const {userType, setUserType, userName, setUserName, userRut, setUserRut} = useUserRole();
   const router = useRouter();
   /*
   // Logica para ingreso temporal
@@ -54,6 +54,8 @@ export default function SignIn() {
         } else {
           setUserType("user");
         }
+        setUserName(data.nombre);
+        setUserRut(data.rut);
         localStorage.setItem("isAuthenticated", "true");
         router.push("/"); 
       } else {

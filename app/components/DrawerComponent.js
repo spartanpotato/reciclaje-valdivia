@@ -33,7 +33,7 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
   // useState([]) : Se usa para inicializar el estado "comentarios" con un array vacío.
   const [comentarios, setComentarios] = useState([]); 
   const [usuario, setUsuario] = useState("");
-  const [comentario, setComnetario] = useState("");
+  const [comentario, setComnetario] = useState();
   const [cambio, setCambio] = useState(true);
   const { btnOpen } = useRef();
   console.log(currentValue);
@@ -115,7 +115,6 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
               <DrawerBody>
                 <CrearComentario
                   usuario={usuario}
-                  setUsuario={setUsuario}
                   comentario={comentario}
                   setComentario={setComnetario}
                   idItem={currentValue.id}
