@@ -30,7 +30,7 @@ const ProponerPunto = () => {
     const [cambio, setCambio] = useState(false); 
     const { isOpen, onOpen, onClose } = useDisclosure(); // Controlar la apertura y cierre del menú
 
-    if (userType == "guest") {
+    if (userType == "guest" || userType == undefined) {
         return null;
     }
     // Función que maneja el cambio de estado de los materiales

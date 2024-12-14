@@ -50,9 +50,11 @@ export default function SignIn() {
         // Cambiar tipo de usuario si el login funciona
         if (user === "admin") {
           setUserType("admin");
+          localStorage.setItem("isAdmin","true");
         } else {
           setUserType("user");
         }
+        localStorage.setItem("isAuthenticated", "true");
         router.push("/"); 
       } else {
         const errorData = await response.json();
