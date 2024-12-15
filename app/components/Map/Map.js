@@ -7,23 +7,20 @@ import DrawerComponent from "@/app/components/DrawerComponent";
 import { useDisclosure } from "@chakra-ui/react";
 import Icons from "./iconos";
 
-//Codigo copiado directamente de un chico de youtube llamado halfword :') tankiu
-
 var CustomIcon = L.Icon.extend({
   options: {
     iconSize: [36, 36], // Tamaño del icono
     popupAnchor: [-3, -76], // Punto desde donde se mostrará el popup en relación al icono
   },
 });
-/*
-const MyIcon = new CustomIcon({
-  iconUrl: "./Vector.svg",
-});
-*/
+
 function Map({ data, tipos }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentValue, setCurrentValue] = useState({});
   const [currentArray, setCurrentArray] = useState([]);
+
+  // Estado para manejar la posición y visibilidad del Popup
+  const [popupPosition, setPopupPosition] = useState(null);
 
   return (
     <>
@@ -32,8 +29,9 @@ function Map({ data, tipos }) {
         zoom={15}
         scrollWheelZoom={true}
         className="homeMap"
-        onClick={() => {
-          console.log("map");
+        onClick={(e) => {
+          // Al hacer clic en el mapa, guardar la posición del clic
+          setPopupPosition(e.latlng);
         }}
       >
         <TileLayer
@@ -41,41 +39,68 @@ function Map({ data, tipos }) {
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
+        {/* Marcadores existentes */}
         {data.map((values) => {
           var coincidencias = 0;
           var filtros = 0;
-          {tipos.map((tipo) => {
+          tipos.forEach((tipo) => {
             const estado = tipo.state;
             const indice = tipo.indice;
-            if (estado){filtros +=1;}
-            if(estado && values.tipos[indice].estado){
+            if (estado) {
+              filtros += 1;
+            }
+            if (estado && values.tipos[indice]?.estado) {
               coincidencias += 1;
             }
+          });
 
-          })}
-
-          if ((coincidencias >= filtros) || filtros === 0){
-          return (
-          <Marker
-            key={values.id} // key: React necesita una key para cada elemento que se renderiza (evita errores)
-            position={values.coordenadas}
-            icon={new CustomIcon({
-              iconUrl: Icons(values.tipos),
-            })}
-            eventHandlers={{
-
-              click: () => {
-                onOpen();
-                setCurrentValue(values);
-                setCurrentArray(values.tipos);
-              },
-            }}
-          ></Marker>
-          )
+          if (coincidencias >= filtros || filtros === 0) {
+            return (
+              <Marker
+                key={values.id}
+                position={values.coordenadas}
+                icon={new CustomIcon({
+                  iconUrl: Icons(values.tipos),
+                })}
+                eventHandlers={{
+                  click: () => {
+                    onOpen();
+                    setCurrentValue(values);
+                    setCurrentArray(values.tipos);
+                  },
+                }}
+              ></Marker>
+            );
           }
         })}
+
+        {/* Popup para añadir un nuevo punto de reciclaje */}
+        {popupPosition && (
+          <Popup
+            position={popupPosition}
+            onClose={() => setPopupPosition(null)}
+          >
+            <div>
+              <h3>Añadir Punto de Reciclaje</h3>
+              <button
+                onClick={() => {
+                  console.log("Añadiendo punto en:", popupPosition);
+                  // Lógica para añadir el punto a la base de datos o estado
+                  setPopupPosition(null);
+                }}
+              >
+                Añadir
+              </button>
+            </div>
+          </Popup>
+        )}
       </MapContainer>
-      <DrawerComponent currentValue={currentValue} isOpen={isOpen} onClose={onClose} array={currentArray} />
+      <DrawerComponent
+        currentValue={currentValue}
+        isOpen={isOpen}
+        onClose={onClose}
+        array={currentArray}
+      />
     </>
   );
 }
