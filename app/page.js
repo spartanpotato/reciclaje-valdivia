@@ -10,7 +10,7 @@ const fetchData = async ()=>{
 }
 */
 export default async function Home() {
-  const data = await fetchData();
+  //const data = await fetchData();
   return (
       <div>
         <Main/>
