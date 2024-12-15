@@ -33,8 +33,8 @@ const CrearReporte = ({
           },
           body: JSON.stringify({
             estado: estado,
-            id_punto: parseInt(idItem, 10), // EL ID CAMBIARÁ DESPUES, CAMBIAR ID DEL PUNTO
-            id_usuario: userRut,
+            id_punto: idItem, // EL ID CAMBIARÁ DESPUES, CAMBIAR ID DEL PUNTO
+            rut: userRut,
             detalles: reporte
           }),
         });
