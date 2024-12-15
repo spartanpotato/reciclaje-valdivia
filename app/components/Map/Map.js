@@ -35,7 +35,7 @@ function Map({ id_tipo, tipos }) {
     if (id_tipo !== undefined) {
       const fetchData = async () => {
         try {
-          const response = await fetch(`/puntos/${id_tipo}`);
+          const response = await fetch(`http://172.233.25.94:54321/puntos/${id_tipo}`);
           if (!response.ok) {
             throw new Error("Failed to fetch puntos");
           }
