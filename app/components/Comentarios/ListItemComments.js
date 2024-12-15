@@ -3,7 +3,7 @@ import "@/app/globals.css";
 import { Box, Text } from "@chakra-ui/react";
 import BorrarComentario from "./BorrarComentario";
 const ListItemComment = ({ comentario }) => {
-  const {comentario: detalles, rut, id_comentario} = comentario;
+  const {detalles, usuario, id_comentario} = comentario;
 
   return (
     <Box className="comments" mb={3} borderRadius='5px' border="4px solid lightgreen" paddingTop={2} paddingBottom={2} paddingLeft={5}>
@@ -11,7 +11,7 @@ const ListItemComment = ({ comentario }) => {
       <Box>
         <Text>
           <b> Usuario: </b>
-          {rut}
+          {usuario.rut}
         </Text>        
       </Box>
       {/* COMENTARIO */}
@@ -22,7 +22,7 @@ const ListItemComment = ({ comentario }) => {
         </Text>
       </Box>
         <BorrarComentario
-          usuario={rut}
+          usuario={usuario.rut}
           comentario={detalles}
           idItem={id_comentario}
         />
