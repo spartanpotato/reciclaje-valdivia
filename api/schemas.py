@@ -37,8 +37,8 @@ class TipoResponse(TipoBase):
 
 # Esquema para "Punto"
 class PuntoBase(BaseModel):
-    coordx: float
-    coordy: float
+    coordx: str
+    coordy: str
     direccion: str
 
 class CreaPunto(PuntoBase):
