@@ -6,6 +6,7 @@ from api.models import Usuario, Punto, Comentario, Reporte
 from api.schemas import DatosUsuario, UsuarioResponse, CreaPunto, PuntoResponse, ComentarioCreate, ComentarioResponse, ReporteResponse, ReporteCreate
 from api.dependencies import get_db
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.orm import joinedload
 
 app = FastAPI()
 
@@ -106,10 +107,18 @@ async def get_comentarios(id_punto: int, db: Session = Depends(get_db)):
 # Añade un comentario a la base de datos dado el ID del usuario
 @app.post("/comentarios", response_model=ComentarioResponse)
 async def crear_comentario(comentario: ComentarioCreate, db: Session = Depends(get_db)):
-    nuevo_comentario = Comentario(**comentario.model_dump())
+    # Crear el nuevo comentario
+    nuevo_comentario = Comentario(**comentario.dict())
     db.add(nuevo_comentario)
     db.commit()
     db.refresh(nuevo_comentario)
+
+    # Eager load 'usuario' and 'punto' relationships after commit
+    nuevo_comentario = db.query(Comentario).options(
+        joinedload(Comentario.usuario),  # Eagerly load 'usuario'
+        joinedload(Comentario.punto)    # Eagerly load 'punto'
+    ).filter(Comentario.id_comentario == nuevo_comentario.id_comentario).one()
+
     return nuevo_comentario
 
 # Elimina un comentario de la base de datos dado su ID
