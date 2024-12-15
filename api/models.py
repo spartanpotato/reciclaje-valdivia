@@ -27,7 +27,7 @@ class Tipo(Base):
 class Punto(Base):
     __tablename__ = "punto"
 
-    id_punto = Column(Integer, primary_key=True, index=True)
+    id_punto = Column(Integer, primary_key=True, autoincremental=True)
     id_tipo = Column(Integer, ForeignKey("tipo.id_tipo"))
     coordx = Column(String, nullable=False)
     coordy = Column(String, nullable=False)
@@ -54,7 +54,7 @@ class Comentario(Base):
 class Reporte(Base):
     __tablename__ = "reporte"
 
-    id_reporte = Column(Integer, primary_key=True, index=True)
+    id_reporte = Column(Integer, primary_key=True, autoincrement=True)
     id_punto = Column(Integer, ForeignKey("punto.id_punto"), nullable=False)
     rut = Column(String, ForeignKey("usuario.rut"), nullable=False)
     detalles = Column(String, nullable=False)
