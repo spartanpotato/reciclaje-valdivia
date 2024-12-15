@@ -39,19 +39,26 @@ function Map({ id_tipo, tipos }) {
           if (!response.ok) {
             throw new Error("Failed to fetch puntos");
           }
-          const puntos = await response.json(); 
-          const formattedData = puntos.map((punto) => ({
-            id: punto.id_punto,
-            coord: [parseFloat(punto.coordx), parseFloat(punto.coordy)],
-            direccion: punto.direccion,
-            tipo: punto.id_tipo,
-          }));
-          setData(formattedData); 
+          const puntos = await response.json();
+          console.log("Fetched puntos:", puntos);  // Log to check the response
+  
+          // Format the data based on the response structure
+          if (Array.isArray(puntos)) {
+            const formattedData = puntos.map((punto) => ({
+              id: punto.id_punto,
+              coord: [parseFloat(punto.coordx), parseFloat(punto.coordy)],
+              direccion: punto.direccion,
+              tipo: punto.tipo.id_tipo, // Accessing the id_tipo from the tipo object
+            }));
+            setData(formattedData);
+          } else {
+            console.error("Fetched data is not an array:", puntos);
+          }
         } catch (error) {
           console.error("Error fetching puntos:", error);
         }
       };
-
+  
       fetchData();
     }
   }, [id_tipo]);
