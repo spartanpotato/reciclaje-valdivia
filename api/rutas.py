@@ -84,8 +84,11 @@ async def delete_punto(id_punto: int,  db: Session = Depends(get_db)):
 # Devuelve la información de todos los puntos filtrados por tipo
 @app.get("/puntos/{id_tipo}", response_model=list[PuntoResponse])
 async def get_puntos_por_tipo(id_tipo: int, db: Session = Depends(get_db)):
-    puntos = db.query(Punto).filter(Punto.id_tipo == id_tipo).all()
-    return puntos
+    if id_tipo == "1":
+        puntos = db.query(Punto).all()
+    else:
+        puntos = db.query(Punto).filter(Punto.id_tipo == id_tipo).all()
+        return puntos
 
 """COMENTARIOS"""
 

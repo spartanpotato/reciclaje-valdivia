@@ -46,13 +46,12 @@ function Map({ id_tipo, tipos }) {
           console.log("puntos del fetch: ", puntos);
   
           // Ensure puntos is an array even if only one item is returned
-          const puntosArray = Array.isArray(puntos) ? puntos : [puntos];
   
           // Log the fetched data for debugging
-          console.log("Fetched puntos:", puntosArray);
+          console.log("Fetched puntos:", puntos);
   
           // Format the data based on the response structure
-          const formattedData = puntosArray.map((punto) => ({
+          const formattedData = puntos.map((punto) => ({
             id: punto.id_punto,
             coord: [parseFloat(punto.coordx), parseFloat(punto.coordy)],
             direccion: punto.direccion,
