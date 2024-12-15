@@ -15,23 +15,28 @@ import { useUserRole } from "@/app/providers/userRole";
 
 
 const CrearReporte = ({
-    // usuario, Usuario que está creando el reporte.
-    idItem, // Punto de reciclaje al que está asociado el reporte.
+    // EL ID CAMBIARÁ DESPUES, CAMBIAR ID DEL PUNTO
+    idItem, // Punto de reciclaje al que está asociado el reporte
   }) => { 
-    const [user, setUser] = useState("");
     const [reporte, setReporte] = useState("");
+    const [estado, setEstado] = useState("pendiente"); // Estado inicial del reporte
     const [cambio, setCambio] = useState(false); 
     const { isOpen, onOpen, onClose } = useDisclosure(); // Controlar la apertura y cierre del menú
-    const {userType} = useUserRole(); // Obtener el userType del contexto
-      // Función para enviar la solicitud POST a la API
+    const {userType, userName, userRut} = useUserRole(); // Obtener el userType del contexto
+    // Función para enviar la solicitud POST a la API
     const sendRequest = async () => {
       try {
-        const response = await fetch(`http://172.233.25.94:54321/reportes/${idItem}/${user}`, {
+        const response = await fetch(`http://172.233.25.94:54321/reportes`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ reporte }),
+          body: JSON.stringify({
+            estado: estado,
+            id_punto: parseInt(idItem, 10), // EL ID CAMBIARÁ DESPUES, CAMBIAR ID DEL PUNTO
+            id_usuario: userRut,
+            detalles: reporte
+          }),
         });
     
         if (response.ok) {
@@ -65,7 +70,6 @@ const CrearReporte = ({
         e.preventDefault();
         await sendRequest(); // Llama a la función simulada
         setReporte(""); // Limpia el campo del reporte
-        setUser(""); // Limpia el campo del user
         setCambio(() => !cambio); // Invierte el valor de cambio para forzar una actualización
     };
 
@@ -86,8 +90,8 @@ const CrearReporte = ({
                         <Input // Sección donde se ingresa el nombre del usuario que hace el reporte
                             className="ReportInput" 
                             placeholder="Usuario" 
-                            value={user} onChange={(e) => setUser(e.target.value)} 
-                            // readOnly 
+                            value={userName}
+                            readOnly 
                         />
                         <Textarea // Area donde se ingresa el texto del reporte
                             className="ReportInput" 
