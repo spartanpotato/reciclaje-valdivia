@@ -21,9 +21,12 @@ const CrearComentario = ({
 }) => {
 
   const { userName, userRut } = useUserRole();
-
+  if(userRut == null){
+    return null;
+  }
   const sendRequest = async () => {
     try {
+      console.log({ userRut, idItem, comentario });
       const response = await fetch(`http://172.233.25.94:54321/comentarios`, {
         method: "POST",
         headers: {
