@@ -70,6 +70,7 @@ class ComentarioResponse(ComentarioBase):
 
 # Esquema para Reporte
 class ReporteBase(BaseModel):
+    estado: str
     id_punto: int
     rut: str
     detalles: str

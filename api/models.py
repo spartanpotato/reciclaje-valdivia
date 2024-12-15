@@ -58,6 +58,7 @@ class Reporte(Base):
     id_punto = Column(Integer, ForeignKey("punto.id_punto"), nullable=False)
     rut = Column(String, ForeignKey("usuario.rut"), nullable=False)
     detalles = Column(String, nullable=False)
+    estado = Column(String, nullable=False)
 
     usuario = relationship("Usuario")
     punto = relationship("Punto")
