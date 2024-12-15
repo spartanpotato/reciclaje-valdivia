@@ -26,14 +26,21 @@ const LoginRedirectButton = () => {
     if (!isAuthenticated) {
       router.push("/authentication/sign_in"); // Aquí "/login" es la ruta del componente de inicio de sesión
     }
+    else {
+      // Si está autenticado, cerramos la sesión
+      localStorage.setItem("isAuthenticated", "false");
+      setIsAuthenticated(false);
+      //Recargar la pagina
+      window.location.reload();
+    }
   };
 
   return (
     <Button 
-      colorScheme={isAuthenticated ? "blue" : "red"} 
+      colorScheme={isAuthenticated ? "red" : "green"} 
       onClick={handleRedirect}
     >
-      {isAuthenticated ? "Bienvenido" : "Ir a Login"}
+      {isAuthenticated ? "Cerrar sesión" : "Iniciar sesión"}
     </Button>
   );
 };
