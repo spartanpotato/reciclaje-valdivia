@@ -6,7 +6,7 @@ from .database import Base
 class Usuario(Base):
     __tablename__ = "usuario"
 
-    rut = Column(String, primary_key=True, index=True)
+    rut = Column(String, primary_key=True, index=True, autoincrement=True)
     nombre = Column(String)
     contrasena = Column(String, nullable=False)
     admin = Column(Boolean, default=False)
