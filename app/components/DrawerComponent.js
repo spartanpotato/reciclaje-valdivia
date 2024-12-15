@@ -100,7 +100,7 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
                     const state = info.estado;
                     if (state === 1){
                     return(
-                    <ListItem>{info.tipo}</ListItem>
+                    <ListItem>{info.nombre}</ListItem>
                     )}})}
                 </UnorderedList>
               </DrawerBody>

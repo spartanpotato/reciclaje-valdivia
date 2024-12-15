@@ -1,12 +1,11 @@
 import "leaflet/dist/leaflet.css";
 import "@/app/globals.css";
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import DrawerComponent from "@/app/components/DrawerComponent";
 import { useDisclosure } from "@chakra-ui/react";
 import Icons from "./iconos";
-import ProponerPunto from "../puntos/ProponerPunto";
 
 var CustomIcon = L.Icon.extend({
   options: {
@@ -24,11 +23,38 @@ function MapClickHandler({ onMapClick }) {
   return null;
 }
 
-function Map({ data, tipos }) {
+function Map({ id_tipo, tipos }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentValue, setCurrentValue] = useState({});
   const [currentArray, setCurrentArray] = useState([]);
   const [newPointLocation, setNewPointLocation] = useState(null);
+  const [data, setData] = useState([]);
+
+  // Volver a traer data cada vez que cambie el id_tipo
+  useEffect(() => {
+    if (id_tipo !== undefined) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`/puntos/${id_tipo}`);
+          if (!response.ok) {
+            throw new Error("Failed to fetch puntos");
+          }
+          const puntos = await response.json(); 
+          const formattedData = puntos.map((punto) => ({
+            id: punto.id_punto,
+            coord: [parseFloat(punto.coordx), parseFloat(punto.coordy)],
+            direccion: punto.direccion,
+            tipo: punto.id_tipo,
+          }));
+          setData(formattedData); 
+        } catch (error) {
+          console.error("Error fetching puntos:", error);
+        }
+      };
+
+      fetchData();
+    }
+  }, [id_tipo]);
 
   const handleMapClick = (latlng) => {
     setNewPointLocation(latlng);
@@ -59,36 +85,25 @@ function Map({ data, tipos }) {
 
         {/* Existing markers */}
         {data.map((values) => {
-          var coincidencias = 0;
-          var filtros = 0;
-          {tipos.map((tipo) => {
-            const estado = tipo.state;
-            const indice = tipo.indice;
-            if (estado){filtros +=1;}
-            if(estado && values.tipos[indice].estado){
-              coincidencias += 1;
-            }
-          })}
 
-          if ((coincidencias >= filtros) || filtros === 0){
-            return (
-              <Marker
-                key={values.id}
-                position={values.coordenadas}
-                icon={new CustomIcon({
-                  iconUrl: Icons(values.tipos),
-                })}
-                eventHandlers={{
-                  click: () => {
-                    onOpen();
-                    setCurrentValue(values);
-                    setCurrentArray(values.tipos);
-                  },
-                }}
-              ></Marker>
-            )
+          return (
+          <Marker
+            key={values.id}
+            position={values.coord}
+            icon={new CustomIcon({
+              iconUrl: Icons(values.tipos),
+            })}
+            eventHandlers={{
+              click: () => {
+                onOpen();
+                setCurrentValue(values);
+                setCurrentArray(tipos);
+              },
+            }}
+          ></Marker>
+          )
           }
-        })}
+        )}
 
         {/* New point location popup */}
         {newPointLocation && (
@@ -98,7 +113,12 @@ function Map({ data, tipos }) {
           >
             <div>
               <h3>¿Quieres añadir un punto de reciclaje aquí?</h3>
-              <ProponerPunto coordenadas = {{newPointLocation}}/>
+              <button 
+                onClick={handleAddRecyclingPoint}
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+              >
+                Añadir Punto de Reciclaje
+              </button>
             </div>
           </Popup>
         )}
