@@ -1,29 +1,45 @@
 import "leaflet/dist/leaflet.css";
 import "@/app/globals.css";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
 import { useState } from "react";
 
 import DrawerComponent from "@/app/components/DrawerComponent";
 import { useDisclosure } from "@chakra-ui/react";
 import Icons from "./iconos";
 
-//Codigo copiado directamente de un chico de youtube llamado halfword :') tankiu
-
 var CustomIcon = L.Icon.extend({
   options: {
-    iconSize: [36, 36], // Tamaño del icono
-    popupAnchor: [-3, -76], // Punto desde donde se mostrará el popup en relación al icono
+    iconSize: [36, 36],
+    popupAnchor: [-3, -76],
   },
 });
-/*
-const MyIcon = new CustomIcon({
-  iconUrl: "./Vector.svg",
-});
-*/
+
+function MapClickHandler({ onMapClick }) {
+  useMapEvents({
+    click: (e) => {
+      onMapClick(e.latlng);
+    },
+  });
+  return null;
+}
+
 function Map({ data, tipos }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentValue, setCurrentValue] = useState({});
   const [currentArray, setCurrentArray] = useState([]);
+  const [newPointLocation, setNewPointLocation] = useState(null);
+
+  const handleMapClick = (latlng) => {
+    setNewPointLocation(latlng);
+  };
+
+  const handleAddRecyclingPoint = () => {
+    // Implement the logic to add a new recycling point
+    // This could open a modal or form to input details
+    console.log("Adding new recycling point at:", newPointLocation);
+    // You might want to call a function to save the new point
+    setNewPointLocation(null);
+  };
 
   return (
     <>
@@ -32,15 +48,15 @@ function Map({ data, tipos }) {
         zoom={15}
         scrollWheelZoom={true}
         className="homeMap"
-        onClick={() => {
-          console.log("map");
-        }}
       >
+        <MapClickHandler onMapClick={handleMapClick} />
+        
         <TileLayer
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
+        {/* Existing markers */}
         {data.map((values) => {
           var coincidencias = 0;
           var filtros = 0;
@@ -51,31 +67,52 @@ function Map({ data, tipos }) {
             if(estado && values.tipos[indice].estado){
               coincidencias += 1;
             }
-
           })}
 
           if ((coincidencias >= filtros) || filtros === 0){
-          return (
-          <Marker
-            key={values.id} // key: React necesita una key para cada elemento que se renderiza (evita errores)
-            position={values.coordenadas}
-            icon={new CustomIcon({
-              iconUrl: Icons(values.tipos),
-            })}
-            eventHandlers={{
-
-              click: () => {
-                onOpen();
-                setCurrentValue(values);
-                setCurrentArray(values.tipos);
-              },
-            }}
-          ></Marker>
-          )
+            return (
+              <Marker
+                key={values.id}
+                position={values.coordenadas}
+                icon={new CustomIcon({
+                  iconUrl: Icons(values.tipos),
+                })}
+                eventHandlers={{
+                  click: () => {
+                    onOpen();
+                    setCurrentValue(values);
+                    setCurrentArray(values.tipos);
+                  },
+                }}
+              ></Marker>
+            )
           }
         })}
+
+        {/* New point location popup */}
+        {newPointLocation && (
+          <Popup 
+            position={newPointLocation}
+            onClose={() => setNewPointLocation(null)}
+          >
+            <div>
+              <h3>¿Quieres añadir un punto de reciclaje aquí?</h3>
+              <button 
+                onClick={handleAddRecyclingPoint}
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+              >
+                Añadir Punto de Reciclaje
+              </button>
+            </div>
+          </Popup>
+        )}
       </MapContainer>
-      <DrawerComponent currentValue={currentValue} isOpen={isOpen} onClose={onClose} array={currentArray} />
+      <DrawerComponent 
+        currentValue={currentValue} 
+        isOpen={isOpen} 
+        onClose={onClose} 
+        array={currentArray} 
+      />
     </>
   );
 }
