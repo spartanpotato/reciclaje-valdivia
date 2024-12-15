@@ -27,7 +27,7 @@ class Tipo(Base):
 class Punto(Base):
     __tablename__ = "punto"
 
-    id_punto = Column(Integer, primary_key=True, autoincremental=True)
+    id_punto = Column(Integer, primary_key=True, autoincrement=True)
     id_tipo = Column(Integer, ForeignKey("tipo.id_tipo"))
     coordx = Column(String, nullable=False)
     coordy = Column(String, nullable=False)
