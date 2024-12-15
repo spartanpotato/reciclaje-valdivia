@@ -86,6 +86,7 @@ async def delete_punto(id_punto: int,  db: Session = Depends(get_db)):
 async def get_puntos_por_tipo(id_tipo: int, db: Session = Depends(get_db)):
     if id_tipo == 1:
         puntos = db.query(Punto).all()
+        return puntos
     else:
         puntos = db.query(Punto).filter(Punto.id_tipo == id_tipo).all()
         return puntos
