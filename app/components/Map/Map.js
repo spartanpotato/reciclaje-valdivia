@@ -41,7 +41,7 @@ function Map({ id_tipo, tipos }) {
           }
           const puntos = await response.json();
   
-          // Ensure the response is an array, even if there is a single point
+          // Ensure puntos is an array even if only one item is returned
           const puntosArray = Array.isArray(puntos) ? puntos : [puntos];
   
           // Log the fetched data for debugging
@@ -55,9 +55,10 @@ function Map({ id_tipo, tipos }) {
             tipo: punto.tipo.id_tipo, // Access id_tipo from tipo object
           }));
   
-          setData(formattedData);
+          setData(formattedData);  // Set data as an array
         } catch (error) {
           console.error("Error fetching puntos:", error);
+          setData([]);  // In case of error, ensure data is an empty array
         }
       };
   
