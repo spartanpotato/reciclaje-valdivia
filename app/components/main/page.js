@@ -21,7 +21,7 @@ function Main() {
 
     const id_tipo = tipos_1.reduce((acc, tipo) => {
         return acc + (tipo.state ? Math.pow(2, tipo.indice) : 0);
-    }, 0);
+    }, 1);
 
     return (
         <div>
