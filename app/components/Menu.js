@@ -42,7 +42,6 @@ function Menu_1({ Vidrio, setVidrio, Latas, setLatas, Plastico, setPlastico, Pap
               </MenuItem>
             </MenuList>
         </Menu>
-        <ProponerPunto/>
         <ReportsRedirectButton/>
         <LoginRedirectButton/>
         </Flex>
