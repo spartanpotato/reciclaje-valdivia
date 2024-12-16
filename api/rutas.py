@@ -7,7 +7,7 @@ from api.schemas import DatosUsuario, UsuarioResponse, CreaPunto, PuntoResponse,
 from api.dependencies import get_db
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import joinedload
-
+from sqlalchemy.sql import func, case
 app = FastAPI()
 
 # CORS
@@ -143,3 +143,32 @@ async def crear_reporte(reporte: ReporteCreate, db: Session = Depends(get_db)):
 async def get_reportes(id_punto: int, db: Session = Depends(get_db)):
     reportes = db.query(Reporte).filter(Reporte.id_punto == id_punto).all()
     return reportes
+
+@app.get("/resumen_reportes")
+async def resumen_reportes(db: Session = Depends(get_db)):
+    resultados = (
+        db.query(
+            Punto.id_punto.label("punto_id"),
+            Punto.direccion.label("direccion"),
+            func.count(Reporte.id_reporte).label("total_reportes"),
+            func.sum(case([(Reporte.estado == "completa", 1)], else_=0)).label("completa"),
+            func.sum(case([(Reporte.estado == "eliminada", 1)], else_=0)).label("eliminada"),
+            func.sum(case([(Reporte.estado == "pendiente", 1)], else_=0)).label("pendiente"),
+        )
+        .join(Reporte, Reporte.punto_id == Punto.id_punto)
+        .group_by(Punto.id_punto, Punto.direccion)
+        .order_by(func.count(Reporte.id_reporte).desc())
+        .all()
+    )
+    respuesta = [
+        {
+            "ID": resultado.punto_id,
+            "Direccion": resultado.direccion,
+            "Total": resultado.total_reportes,
+            "Completa": resultado.completa,
+            "Eliminada": resultado.eliminada,
+            "Pendiente": resultado.pendiente,
+        }
+        for resultado in resultados
+    ]
+    return respuesta
