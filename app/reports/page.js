@@ -1,34 +1,30 @@
 "use client";
 import { Box, Button, Table, Thead, Tbody, Tr, Th, Td, Heading } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from "react";
 
 export default function Reports() {
   const router = useRouter();
+  const [reportes, setReportes] = useState([]);
+  useEffect(() => {
+    const obtenerReportes = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/resumen_reportes');
+        if (!response.ok) {
+          throw new Error('Error al obtener los reportes');
+        }
+        const data = await response.json();
+        setReportes(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    obtenerReportes();
+  },[]);
 
-
-  //esto es temporal
-  const markers = [
-    {
-      id: 2,
-      name: 'Marcador 1',
-      detail: '201',
-      position: [51.505, -0.09],
-    },
-    {
-      id: 1,
-      name: 'Marcador 2',
-      cant: '240',
-      position: [51.51, -0.1],
-    },
-  ];
-  //necesito una lista de los puntos con los atributos tipo asi
-  //para poder ir y moverme, donde sea de orden descendente por la
-  //cantidad de reportes pendientes
-
-
-  const handleRedirect = () => {
-    // Aqui van a faltar cositas jiji uwu
-    router.push('/');
+  const handleRedirect = (posX,posY) => {
+    //router.push(`/?lat=${posX}&lng=${posY}`);
+    console.log("Crazy hanburgir");
   };
 
   return (
@@ -40,22 +36,28 @@ export default function Reports() {
         <Thead>
           <Tr>
             <Th>ID</Th>
-            <Th>Nombre</Th>
+            <Th>Direccion</Th>
             <Th>Cantidad</Th>
+            <Th>Pendiente</Th>
+            <Th>Completos</Th>
+            <Th>Eliminados</Th>
             <Th>Ir</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {markers.map((marker) => (
-            <Tr key={marker.id}>
-              <Td>{marker.id}</Td>
-              <Td>{marker.name}</Td>
-              <Td>{marker.cant}</Td>
+          {reportes.map((reporte) => (
+            <Tr key={reporte.ID}>
+              <Td>{reporte.ID}</Td>
+              <Td>{reporte.Direccion}</Td>
+              <Td>{reporte.Total}</Td>
+              <Td>{reporte.Pendiente}</Td>
+              <Td>{reporte.Completa}</Td>
+              <Td>{reporte.Eliminados}</Td>
               <Td>
                 <Button
                   colorScheme="blue"
                   size="sm"
-                  onClick={handleRedirect}
+                  onClick={handleRedirect(reporte.CoordX, reporte.CoordY)}
                 >
                   Ir al punto
                 </Button>
