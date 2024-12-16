@@ -10,10 +10,9 @@ import {
   useDisclosure 
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useUserRole } from "@/app/providers/userRole";
+import { useRouter } from "next/navigation"; // Importamos useRouter para la redirección
 
-const ProponerPunto = ({ lat, lng }) => { 
-    const { userType } = useUserRole(); 
+const ProponerPunto = ({ lat, lng, userType }) => {  
     const [direccion, setDireccion] = useState(""); 
     const [materiales, setMateriales] = useState({
         plastico: false,
@@ -23,9 +22,17 @@ const ProponerPunto = ({ lat, lng }) => {
         organico: false, 
     }); 
     const { isOpen, onOpen, onClose } = useDisclosure(); 
-
-    if (userType === "guest" || userType === undefined) {
-        return null; // No mostrar el botón para usuarios invitados o no autenticados
+    const router = useRouter(); // Instancia de useRouter para redirigir
+    console.log("userType:", userType);
+    if (userType === "guest" || userType === null) {
+        // Si el usuario no está autenticado, mostramos el botón de iniciar sesión
+        return (
+            <Menu isOpen={isOpen} onClose={onClose} size={"md"}>
+                <MenuButton as={Button} className="PropButton" mb={4} onClick={() => router.push("/authentication/sign_in")} size={"sm"}>
+                    Iniciar sesión
+                </MenuButton>
+            </Menu>
+        );
     }
 
     const handleMaterialChange = (e) => {
