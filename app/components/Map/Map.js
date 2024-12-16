@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import DrawerComponent from "@/app/components/DrawerComponent";
 import { useDisclosure } from "@chakra-ui/react";
 import Icons from "./iconos";
+import ProponerPunto from "../puntos/ProponerPunto";
 
 var CustomIcon = L.Icon.extend({
   options: {
@@ -145,6 +146,7 @@ function Map({ id_tipo, tipos }) {
               >
                 Añadir Punto de Reciclaje
               </button>
+              <ProponerPunto lat={newPointLocation.lat} lng={newPointLocation.lng} />
             </div>
           </Popup>
         )}

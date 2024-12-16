@@ -63,7 +63,7 @@ async def get_punto(id_punto: int, db: Session = Depends(get_db)):
     return punto
 
 # Añade un punto a la base de datos
-@app.post("/puntos", response_model= list[PuntoResponse])
+@app.post("/puntos", response_model= PuntoResponse)
 async def crear_punto(punto: CreaPunto, db: Session = Depends(get_db)):
     nuevo_punto = Punto(**punto.model_dump())
     db.add(nuevo_punto)

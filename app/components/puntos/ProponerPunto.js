@@ -12,7 +12,7 @@ import {
 import { useState } from "react";
 import { useUserRole } from "@/app/providers/userRole";
 
-const ProponerPunto = ({ coordenadas }) => { 
+const ProponerPunto = ({ lat, lng }) => { 
     const { userType } = useUserRole(); 
     const [direccion, setDireccion] = useState(""); 
     const [materiales, setMateriales] = useState({
@@ -25,7 +25,20 @@ const ProponerPunto = ({ coordenadas }) => {
     const { isOpen, onOpen, onClose } = useDisclosure(); 
 
     if (userType === "guest" || userType === undefined) {
-        return null; // No mostrar el botón para usuarios invitados o no autenticados
+        //Si no esta registrado, un boton lo redirecciona a 'authentication/log_in'
+        return (
+            <Menu isOpen={isOpen} onClose={onClose} size={"md"}>
+                <MenuButton as={Button} className="PropButton" mb={4} onClick={onOpen}>
+                    Proponer punto
+                </MenuButton>
+                
+                <MenuList className="ProponerPunto">
+                    <Box textAlign={"center"}>
+                        <Text fontSize="xl">Debes iniciar sesión para proponer un punto</Text>
+                    </Box>
+                </MenuList>
+            </Menu>
+        );
     }
 
     const handleMaterialChange = (e) => {
@@ -38,13 +51,6 @@ const ProponerPunto = ({ coordenadas }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        // Crear el cuerpo de la solicitud
-        const punto = {
-            direccion,
-            coordenadas, // Coordenadas pasadas como prop desde el mapa
-            materiales: Object.keys(materiales).filter((key) => materiales[key]),
-        };
 
         try {
             const response = await fetch("http://172.233.25.94:54321/puntos", {
@@ -53,7 +59,10 @@ const ProponerPunto = ({ coordenadas }) => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    ...punto,
+                    coordx: lat.toString(),
+                    coordy: lng.toString(),
+                    direccion: direccion,
+                    id_tipo: 2,
                 })
             });
 
