@@ -39,7 +39,7 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
   const [comentario, setComnetario] = useState();
   const [cambio, setCambio] = useState(true);
   const { btnOpen } = useRef();
-  const { isOpenSesamoe, setOpenSesamoe} = useState(false);
+  const [isOpenSesamoe, setOpenSesamoe] = useState(false);
   const [currentArray, setCurrentArray] = useState([]);
   console.log(currentValue);
   // Permite realizar efectos secundarios en componentes funcionales, como obtener datos, 
@@ -106,7 +106,7 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
                   admin={usuario}
                   item={currentValue}
                 />
-                <ReportSeeButton onOpenSesamoe={setOpenSesamoe}/>
+                <ReportSeeButton setOpenSesamoe={setOpenSesamoe}/>
           </DrawerHeader>
 
             <DrawerBody>
