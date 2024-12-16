@@ -80,7 +80,7 @@ class ReporteCreate(ReporteBase):
 
 class ReporteResponse(ReporteBase):
     id_reporte: int
-    user: UsuarioResponse
+    usuario: UsuarioResponse
     punto: PuntoResponse
 
     class Config:
