@@ -81,15 +81,18 @@ async def delete_punto(id_punto: int,  db: Session = Depends(get_db)):
     db.commit()
     return {"message": "Punto eliminado exitosamente"}
 
-# Devuelve la información de todos los puntos filtrados por tipo
+# Devuelve la información de todos los puntos filtrados por tipo usando comparación bit a bit
 @app.get("/puntos/tipos/{id_tipo}", response_model=list[PuntoResponse])
 async def get_puntos_por_tipo(id_tipo: int, db: Session = Depends(get_db)):
     if id_tipo == 1:
+        # Si id_tipo es 1, devuelve todos los puntos
         puntos = db.query(Punto).all()
         return puntos
     else:
-        puntos = db.query(Punto).filter(Punto.id_tipo == id_tipo).all()
+        # Devuelve puntos cuyo id_tipo coincida con los bits de id_tipo
+        puntos = db.query(Punto).filter(Punto.id_tipo.op('&')(id_tipo) != 0).all()
         return puntos
+
 
 """COMENTARIOS"""
 

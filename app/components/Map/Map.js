@@ -6,6 +6,7 @@ import DrawerComponent from "@/app/components/DrawerComponent";
 import { useDisclosure } from "@chakra-ui/react";
 import Icons from "./iconos";
 import ProponerPunto from "../puntos/ProponerPunto";
+import { useUserRole } from "@/app/providers/userRole";
 
 var CustomIcon = L.Icon.extend({
   options: {
@@ -29,7 +30,7 @@ function Map({ id_tipo, tipos }) {
   const [currentArray, setCurrentArray] = useState([]);
   const [newPointLocation, setNewPointLocation] = useState(null);
   const [data, setData] = useState([]);
-  console.log("tipos at render:", tipos);
+  const { userType } = useUserRole();
 
   // Volver a traer data cada vez que cambie el id_tipo
   useEffect(() => {
@@ -77,14 +78,6 @@ function Map({ id_tipo, tipos }) {
     setNewPointLocation(latlng);
   };
 
-  const handleAddRecyclingPoint = () => {
-    // Implement the logic to add a new recycling point
-    // This could open a modal or form to input details
-    console.log("Adding new recycling point at:", newPointLocation);
-    // You might want to call a function to save the new point
-    setNewPointLocation(null);
-  };
-
   return (
     <>
       <MapContainer
@@ -128,7 +121,7 @@ function Map({ id_tipo, tipos }) {
           >
             <div>
               <h3>¿Quieres añadir un punto de reciclaje aquí?</h3>
-              <ProponerPunto lat={newPointLocation?.lat} lng={newPointLocation?.lng}/>
+              <ProponerPunto lat={newPointLocation?.lat} lng={newPointLocation?.lng} userType={userType}/>
             </div>
           </Popup>
         )}
