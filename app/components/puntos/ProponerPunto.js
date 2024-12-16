@@ -27,7 +27,7 @@ const ProponerPunto = ({ lat, lng }) => {
     if (userType === "guest" || userType === undefined) {
         return null; // No mostrar el botón para usuarios invitados o no autenticados
     }
-    console.log(typeof(String(lat)));
+
     const handleMaterialChange = (e) => {
         const { name, checked } = e.target;
         setMateriales((prevState) => ({
@@ -39,6 +39,20 @@ const ProponerPunto = ({ lat, lng }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Definir los tipos con sus índices y valores de estado
+        const tipos_1 = [
+            { nombre: "Organico", state: materiales.organico, indice: 0 },
+            { nombre: "Latas", state: materiales.latas, indice: 1 },
+            { nombre: "Papel_Carton", state: materiales.papelCarton, indice: 2 },
+            { nombre: "Vidrio", state: materiales.vidrio, indice: 3 },
+            { nombre: "Plastico", state: materiales.plastico, indice: 4 }
+        ];
+
+        // Calcular el id_tipo basado en la fórmula
+        const id_tipo = tipos_1.reduce((acc, tipo) => {
+            return acc + (tipo.state ? Math.pow(2, tipo.indice) : 0);
+        }, 1);
+
         try {
             const response = await fetch("http://172.233.25.94:54321/puntos", {
                 method: "POST",
@@ -49,7 +63,7 @@ const ProponerPunto = ({ lat, lng }) => {
                     coordx: String(lat),
                     coordy: String(lng),
                     direccion: direccion,
-                    id_tipo: 11
+                    id_tipo: id_tipo // Usar el id_tipo calculado
                 })
             });
 
