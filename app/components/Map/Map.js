@@ -30,6 +30,8 @@ function Map({ id_tipo, tipos }) {
   const [newPointLocation, setNewPointLocation] = useState(null);
   const [data, setData] = useState([]);
 
+  console.log("tipos at render:", tipos);
+
   // Volver a traer data cada vez que cambie el id_tipo
   useEffect(() => {
     if (id_tipo !== undefined) {
@@ -40,6 +42,8 @@ function Map({ id_tipo, tipos }) {
             throw new Error("Failed to fetch puntos");
           }
           const puntos = await response.json();
+
+          console.log("puntos del fetch: ", puntos);
   
           // Ensure puntos is an array even if only one item is returned
           const puntosArray = Array.isArray(puntos) ? puntos : [puntos];
@@ -101,7 +105,7 @@ function Map({ id_tipo, tipos }) {
             key={values.id}
             position={values.coord}
             icon={new CustomIcon({
-              iconUrl: Icons(values.tipos),
+              iconUrl: Icons(tipos),
             })}
             eventHandlers={{
               click: () => {

@@ -23,6 +23,8 @@ function Main() {
         return acc + (tipo.state ? Math.pow(2, tipo.indice) : 0);
     }, 1);
 
+    console.log("tipos_1 at render:", tipos_1);
+
     return (
         <div>
             <Menu_1
