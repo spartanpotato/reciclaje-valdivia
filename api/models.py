@@ -62,3 +62,6 @@ class Reporte(Base):
 
     usuario = relationship("Usuario")
     punto = relationship("Punto")
+
+    # punto = relationship("Punto", back_populates="reportes")
+    # usuario = relationship("Usuario", back_populates="reportes")

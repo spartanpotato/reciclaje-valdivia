@@ -10,54 +10,43 @@ import { useState } from "react";
 import { useUserRole } from "@/app/providers/userRole";
 // Componente: Botón que permite hacer un reporte a un punto especifico
 
-const BorrarComentario = ({
-    usuario, // Usuario que creo el comentario.
-    comentario, // Comentario a eliminar
-    idItem, // Punto de reciclaje al que está asociado el reporte.
-  }) => { 
+const BorrarComentario = ({ idCom }) => { 
     const {userType} = useUserRole(); // Obtener el userType del contexto
     const [cambio, setCambio] = useState(false); // Indicador booleano que se utiliza para forzar la actualización del componente.
 
 
     // Función para enviar la solicitud DELETE a la API
-    // const sendRequest = async () => {
-    //   try {
-    //     const response = await fetch(`http://172.233.25.94:54321/comentarios/${idComentario}`, {
-    //       method: "DELETE",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     });
+    const sendRequest = async () => {
+      try {
+        const response = await fetch(`http://172.233.25.94:54321/comentarios/${idCom}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-    //     if (response.ok) {
-    //       console.log("Comentario eliminado");
-    //       alert("Comentario eliminado exitosamente");
-    //     } else {
-    //       const errorData = await response.json();
-    //       alert(`Error: ${errorData.detail || "Algo salió mal"}`);
-    //     }
-    //   } catch (error) {
-    //     console.error("Error en la solicitud:", error);
-    //     alert("Error en la solicitud");
-    //   }
-    // };
+        if (!response.ok) {
+          throw new Error("Fallo eliminar el comentario");
+        }
 
-    // // Función para manejar el envío del formulario
-    // const handleSubmit = async (e) => {
-    //   e.preventDefault();
-    //   await sendRequest(); // Llama a la función para enviar la solicitud DELETE
-    //   // setCambio(() => !cambio); // Invierte el valor de cambio para forzar una actualización
-    // };
+        console.log("Comentario eliminado");
+        alert("Comentario eliminado exitosamente");
+      } catch (error) {
+        console.error("Error al eliminar el comentario:", error);
+        alert("Hubo un error al eliminar el comentario");
+      }
+    };
+
 
         // Función simulada para enviar la solicitud (TEMPORAL)
-    const sendRequest = async () => {
-        // Simula el envío de la solicitud sin hacer nada
-        console.log("Se eliminará:");
-        console.log("Usuario:", usuario);
-        console.log("Comentario:", comentario);
-        console.log("ID del ítem:", idItem);
-        alert("Comentario 'eliminado' localmente (no enviado)");
-    };
+    // const sendRequest = async () => {
+    //     // Simula el envío de la solicitud sin hacer nada
+    //     console.log("Se eliminará:");
+    //     console.log("Usuario:", usuario);
+    //     console.log("Comentario:", comentario);
+    //     console.log("ID del ítem:", idItem);
+    //     alert("Comentario 'eliminado' localmente (no enviado)");
+    // };
     
 
     // Función para manejar el envío del formulario (TEMPORAL)
@@ -92,4 +81,3 @@ const BorrarComentario = ({
     };
 
 export default BorrarComentario;
-

@@ -15,7 +15,6 @@ import { useUserRole } from "@/app/providers/userRole";
 
 
 const CrearReporte = ({
-    // EL ID CAMBIARÁ DESPUES, CAMBIAR ID DEL PUNTO
     idItem, // Punto de reciclaje al que está asociado el reporte
   }) => { 
     const [reporte, setReporte] = useState("");
@@ -33,37 +32,24 @@ const CrearReporte = ({
           },
           body: JSON.stringify({
             estado: estado,
-            id_punto: idItem, // EL ID CAMBIARÁ DESPUES, CAMBIAR ID DEL PUNTO
+            id_punto: idItem,
             rut: userRut,
             detalles: reporte
           }),
         });
     
-        if (response.ok) {
-          const data = await response.json();
-          console.log("Reporte creado:", data);
-          alert("Reporte creado exitosamente");
-          onClose();
-        } else {
-          const errorData = await response.json();
-          console.error("Error en la solicitud:", errorData);
-          alert(`Error: ${JSON.stringify(errorData.detail) || "Algo salió mal"}`);
+        if (!response.ok) {
+          throw new Error("Fallo al crear el reporte");
         }
+
+        console.log("Se creo un reporte!");
+        alert("Se envió el reporte con exito!");
       } catch (error) {
-        console.error("Error en la solicitud:", error);
-        alert(`Error en la solicitud: ${JSON.stringify(error.message)}`);
+        console.error("Error al crear el reporte:", error);
+        alert("Hubo un error al crear un reporte");
       }
+
     };
-    // // Función simulada para enviar la solicitud (TEMPORAL)
-    // const sendRequest = async () => {
-    //     // Simula el envío de la solicitud sin hacer nada
-    //     console.log("Datos ingresados:");
-    //     console.log("Usuario:", usuario);
-    //     console.log("Reporte:", reporte);
-    //     console.log("ID del ítem:", idItem);
-    //     onClose();
-    //     alert("Comentario procesado localmente (no enviado)");
-    // };
 
     // Función para manejar el envío del formulario (TEMPORAL)
     const handleSubmit = async (e) => {
