@@ -88,3 +88,15 @@ class ReporteResponse(ReporteBase):
 
 class ReporteUpdate(BaseModel):
     estado: str
+    
+class ReporteGeneralResponse(BaseModel):
+    ID: int
+    Direccion: str
+    CoordX: str
+    CoordY: str
+    Total: int
+    Completa: int
+    Eliminada: int
+    Pendiente: int
+    class Config:
+        orm_mode=True

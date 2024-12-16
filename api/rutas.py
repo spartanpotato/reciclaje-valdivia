@@ -3,7 +3,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from api.database import Base, engine
 from api.models import Usuario, Punto, Comentario, Reporte
-from api.schemas import DatosUsuario, UsuarioResponse, CreaPunto, PuntoResponse, ComentarioCreate, ComentarioResponse, ReporteResponse, ReporteCreate, ReporteUpdate
+from api.schemas import DatosUsuario, UsuarioResponse, CreaPunto, PuntoResponse, ComentarioCreate, ComentarioResponse, ReporteResponse, ReporteCreate, ReporteUpdate, ReporteGeneralResponse
 from api.dependencies import get_db
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import joinedload
@@ -160,7 +160,7 @@ def actualizar_reporte(reporte_id: int, reporte_update: ReporteUpdate, db: Sessi
     db.refresh(reporte)
     return reporte
 
-@app.get("/resumen_reportes")
+@app.get("/resumen_reportes", response_model=ReporteGeneralResponse)
 async def resumen_reportes(db: Session = Depends(get_db)):
     resultados = (
         db.query(
@@ -178,17 +178,4 @@ async def resumen_reportes(db: Session = Depends(get_db)):
         .order_by(func.sum(case([(Reporte.estado == "pendiente", 1)], else_=0)).desc())
         .all()
     )
-    respuesta = [
-        {
-            "ID": resultado.punto_id,
-            "Direccion": resultado.direccion,
-            "CoordX": resultado.coordx,
-            "CoordY": resultado.coordy,
-            "Total": resultado.total_reportes,
-            "Completa": resultado.completa,
-            "Eliminada": resultado.eliminada,
-            "Pendiente": resultado.pendiente,
-        }
-        for resultado in resultados
-    ]
-    return respuesta
+    return resultados
