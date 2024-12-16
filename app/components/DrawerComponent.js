@@ -40,11 +40,16 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
   const [cambio, setCambio] = useState(true);
   const { btnOpen } = useRef();
   const { isOpenSesamoe, setOpenSesamoe} = useState(false);
+  const [currentArray, setCurrentArray] = useState([]);
   console.log(currentValue);
   // Permite realizar efectos secundarios en componentes funcionales, como obtener datos, 
   // suscribirse a servicios, o manipular el DOM.
   // Aquí se usa para obtener datos cuando cambio o currentValue cambian.
   useEffect(() => {
+    if (!currentValue || !currentValue.tipos) {
+      console.log("currentValue or tipos is null, skipping effect.");
+      return; // Exit early if currentValue is null or does not have tipos
+    }
     console.log("currentvalue: ", currentValue);
     console.log("array en drawer: ", array);
     const fetchData = async () => {
@@ -62,6 +67,15 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
       }
     };
     fetchData();
+
+    const tiposArray = Object.entries(currentValue.tipos)
+        .filter(([key]) => key !== "id_tipo") 
+        .map(([key, value]) => ({ key, value }));
+
+    console.log("Converted tipos array: ", tiposArray);
+
+    setCurrentArray(tiposArray);
+    
   }, [cambio, currentValue]);
 
   // define la estructura y el contenido del componente DrawerComponent, que es una sideBar (drawer).
@@ -103,10 +117,10 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
               </DrawerHeader>
               <DrawerBody>
                 <UnorderedList>
-                  {array.map((info) => {
-                    if (info.state){
+                  {currentArray.map((info) => {
+                    if (info.value){
                     return(
-                    <ListItem>{info.nombre}</ListItem>
+                    <ListItem>{info.key}</ListItem>
                     )}})}
                 </UnorderedList>
               </DrawerBody>

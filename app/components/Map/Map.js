@@ -64,6 +64,7 @@ function Map({ id_tipo, tipos }) {
             coord: [parseFloat(punto.coordx), parseFloat(punto.coordy)],
             direccion: punto.direccion,
             tipo: punto.tipo.id_tipo, // Access id_tipo from tipo object
+            tipos: punto.tipo,
           }));
   
           setData(formattedData);  // Set data as an array
