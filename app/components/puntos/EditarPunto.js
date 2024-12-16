@@ -28,8 +28,8 @@ const EditarPunto = ({
         latas: false,
         organico: false, 
       }); // Estado para modificar los materiales que acepta un punto
-    const [coordX, setCoordX] = useState(item.coordenadas[0]); // Estado para modificar la coordenada X
-    const [coordY, setCoordY] = useState(item.coordenadas[1]); // Estado para modificar la coordenada Y
+    const [coordX, setCoordX] = useState(item.coord[0]); // Estado para modificar la coordenada X
+    const [coordY, setCoordY] = useState(item.coord[1]); // Estado para modificar la coordenada Y
     const [cambio, setCambio] = useState(false); 
     const { isOpen, onOpen, onClose } = useDisclosure(); // Controlar la apertura y cierre del menú
 
