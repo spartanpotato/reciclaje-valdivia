@@ -44,6 +44,10 @@ class PuntoBase(BaseModel):
 class CreaPunto(PuntoBase):
     id_tipo: int
 
+class PuntoUpdate(BaseModel):
+    direccion: str
+    id_tipo: int
+
 class PuntoResponse(PuntoBase):
     id_punto: int
     tipo: TipoResponse

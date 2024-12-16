@@ -3,7 +3,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from api.database import Base, engine
 from api.models import Usuario, Punto, Comentario, Reporte
-from api.schemas import DatosUsuario, UsuarioResponse, CreaPunto, PuntoResponse, ComentarioCreate, ComentarioResponse, ReporteResponse, ReporteCreate, ReporteUpdate, ReporteGeneralResponse
+from api.schemas import DatosUsuario, UsuarioResponse, CreaPunto, PuntoResponse, ComentarioCreate, ComentarioResponse, ReporteResponse, ReporteCreate, ReporteUpdate, ReporteGeneralResponse, PuntoUpdate
 from api.dependencies import get_db
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import joinedload
@@ -93,6 +93,17 @@ async def get_puntos_por_tipo(id_tipo: int, db: Session = Depends(get_db)):
         puntos = db.query(Punto).filter(Punto.id_tipo.op('&')(id_tipo) != 0).all()
         return puntos
 
+
+@app.put("/puntos/{id_punto}", response_model=PuntoResponse)
+def actualizar_punto(id_punto: int, punto_update: PuntoUpdate, db: Session = Depends(get_db)):
+    punto = db.query(Punto).filter(Punto.id_punto == id_punto).first()
+    if not punto:
+        raise HTTPException(status_code=404, detail="Punto no encontrado")
+    for key, value in punto_update.model_dump().items():
+        setattr(punto, key, value)
+    db.commit()
+    db.refresh(punto)
+    return punto
 
 """COMENTARIOS"""
 
