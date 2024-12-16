@@ -37,18 +37,16 @@ function Map({ id_tipo, tipos }) {
     if (id_tipo !== undefined) {
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://172.233.25.94:54321/puntos/${id_tipo}`);
+          const response = await fetch(`http://172.233.25.94:54321/puntos/tipos/${id_tipo}`);
           if (!response.ok) {
             throw new Error("Failed to fetch puntos");
           }
           const puntos = await response.json();
 
+          console.log("id_tipo enviado: ", id_tipo);
+
           console.log("puntos del fetch: ", puntos);
-  
-          // Ensure puntos is an array even if only one item is returned
-  
-          // Log the fetched data for debugging
-          console.log("Fetched puntos:", puntos);
+
   
           // Format the data based on the response structure
           const formattedData = puntos.map((punto) => ({
