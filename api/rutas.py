@@ -3,7 +3,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from api.database import Base, engine
 from api.models import Usuario, Punto, Comentario, Reporte
-from api.schemas import DatosUsuario, UsuarioResponse, CreaPunto, PuntoResponse, ComentarioCreate, ComentarioResponse, ReporteResponse, ReporteCreate
+from api.schemas import DatosUsuario, UsuarioResponse, CreaPunto, PuntoResponse, ComentarioCreate, ComentarioResponse, ReporteResponse, ReporteCreate, ReporteUpdate
 from api.dependencies import get_db
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import joinedload
