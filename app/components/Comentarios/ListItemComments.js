@@ -22,9 +22,7 @@ const ListItemComment = ({ comentario }) => {
         </Text>
       </Box>
         <BorrarComentario
-          usuario={usuario.rut}
-          comentario={detalles}
-          idItem={id_comentario}
+          idCom={id_comentario}
         />
     </Box>
   );
