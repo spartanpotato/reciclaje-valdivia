@@ -19,7 +19,7 @@ const ReportsRedirectButton = () => {
 
   const handleRedirect = () => {
     if (isAdmin) {
-      router.push("/");
+      router.push("/reports");
     }
   };
   if(!isAdmin){

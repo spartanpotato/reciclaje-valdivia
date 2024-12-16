@@ -85,3 +85,6 @@ class ReporteResponse(ReporteBase):
 
     class Config:
         orm_mode = True
+
+class ReporteUpdate(BaseModel):
+    estado: str

@@ -1,8 +1,7 @@
 import "leaflet/dist/leaflet.css";
 import "@/app/globals.css";
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, useMapEvents, useMap } from "react-leaflet";
 import { useState, useEffect } from "react";
-
 import DrawerComponent from "@/app/components/DrawerComponent";
 import { useDisclosure } from "@chakra-ui/react";
 import Icons from "./iconos";
@@ -23,13 +22,24 @@ function MapClickHandler({ onMapClick }) {
   return null;
 }
 
+function CenterMap({ lat, lng }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (lat && lng) {
+      map.setView([lat, lng], 15); // Sin animación
+    }
+  }, [lat, lng, map]);
+
+  return null;
+}
+
 function Map({ id_tipo, tipos }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentValue, setCurrentValue] = useState({});
   const [currentArray, setCurrentArray] = useState([]);
   const [newPointLocation, setNewPointLocation] = useState(null);
   const [data, setData] = useState([]);
-
   console.log("tipos at render:", tipos);
 
   // Volver a traer data cada vez que cambie el id_tipo
@@ -99,7 +109,6 @@ function Map({ id_tipo, tipos }) {
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
         {/* Existing markers */}
         {data.map((values) => {
 

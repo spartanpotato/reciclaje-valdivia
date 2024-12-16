@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { 
-    Button, Modal, 
+    Button, Modal, Table,
     ModalOverlay, ModalContent, ModalHeader, 
     ModalCloseButton, ModalBody,
     Thead, Tbody, Tr,
@@ -10,13 +10,10 @@ import {
 } from "@chakra-ui/react";
 
 
-const ReportInPoint = ({isOpen,onClose,idPoint}) => {
-    const markers = [
-        { id: 1, href: "/subitem1" },
-        { id: 2, href: "/subitem2" },
-        { id: 3, href: "/subitem3" },
-      ];
+const ReportInPoint = ({isOpen,setOpen,idPoint}) => {
+    
     const [reports,setReports] = useState([]);
+
     useEffect(() => {
         if (isOpen) {
             
@@ -34,9 +31,12 @@ const ReportInPoint = ({isOpen,onClose,idPoint}) => {
         }
     }, [isOpen]);
     
+    const handleStateComp = () => {
+        setOpen(false);
+    };
+
     const handleReportState = async (actualReport,reportState) =>{
-        console.log("AAAAAAAAAAA")
-        /*try {
+        try {
             const response = await fetch(`http://172.233.25.94:54321/reportes/${actualReport}}`, {
                 method: "PUT",
                 body: JSON.stringify({ estado: reportState }),
@@ -46,15 +46,14 @@ const ReportInPoint = ({isOpen,onClose,idPoint}) => {
                 throw new Error("Error al actualizar el reporte");
             }
 
-            // Actualizamos la lista de reportes localmente después de la actualización
-            setReports((prevReports) => prevReports.filter((report) => report.id !== id));
+            setReports((prevReports) => prevReports.filter((report) => report.id_report !== actualReport));
             console.log("Reporte actualizado exitosamente");
         } catch (error) {
             console.error("Error al enviar la solicitud a la API", error);
         }
-        */
     }
-    return(<Modal isOpen={isOpen} onClose={onClose}>
+
+    return(<Modal isOpen={isOpen} onClose={handleStateComp}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Lista de Reportes</ModalHeader>
@@ -64,6 +63,7 @@ const ReportInPoint = ({isOpen,onClose,idPoint}) => {
             <Thead>
             <Tr>
                 <Th>Usuario</Th>
+                <Th>Rut</Th>
                 <Th>Detalles</Th>
                 <Th>Accion</Th>
             </Tr>
@@ -71,11 +71,12 @@ const ReportInPoint = ({isOpen,onClose,idPoint}) => {
             <Tbody>
             {reports.map((report) => (
                 <Tr key={report.id_reporte}>
-                <Td>{report.id}</Td>
+                <Td>{report.user.nombre}</Td>
+                <Td>{report.user.rut}</Td>
                 <Td>{report.detalles}</Td>
-                <Td>
+                <Td style={{ display: "flex", gap: "1vw" }}>
                     <Button
-                    colorScheme="blue"
+                    colorScheme="red"
                     size="sm"
                     onClick={handleReportState(report.id_reporte,"eliminado")}
                     >
@@ -86,7 +87,7 @@ const ReportInPoint = ({isOpen,onClose,idPoint}) => {
                     size="sm"
                     onClick={handleReportState(report.id_reporte,"completado")}
                     >
-                    Completado
+                    Completar
                     </Button>
                 </Td>
                 </Tr>

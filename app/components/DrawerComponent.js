@@ -15,11 +15,14 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { useRef } from "react";
+import { useDisclosure } from "@chakra-ui/react";
 import ListComments from "./Comentarios/ListComments";
 import CrearComentario from "./Comentarios/CrearComentario";
 import { useState,useEffect } from "react";
 import CrearReporte from "./Reporte/CrearReporte";
 import EditarPunto from "./puntos/EditarPunto";
+import ReportSeeButton from "./Reporte/VerReporte";
+import ReportInPoint from "./Reporte/ReportePunto";
 
 // Componente : Sidebar en el mapa al apretar un punto
 
@@ -36,8 +39,8 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
   const [comentario, setComnetario] = useState();
   const [cambio, setCambio] = useState(true);
   const { btnOpen } = useRef();
+  const { isOpenSesamoe, setOpenSesamoe} = useState(false);
   console.log(currentValue);
-
   // Permite realizar efectos secundarios en componentes funcionales, como obtener datos, 
   // suscribirse a servicios, o manipular el DOM.
   // Aquí se usa para obtener datos cuando cambio o currentValue cambian.
@@ -89,6 +92,7 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
                   admin={usuario}
                   item={currentValue}
                 />
+                <ReportSeeButton onOpenSesamoe={setOpenSesamoe}/>
           </DrawerHeader>
 
             <DrawerBody>
@@ -138,12 +142,14 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
               <Button variant="solid" size={"lg"} mr={3} onClick={onClose}>
                 Volver
               </Button>
+              <ReportInPoint/>
             </Flex>
 
           </DrawerFooter>
 
         </DrawerContent>
       </Drawer>
+      <ReportInPoint isOpen={isOpenSesamoe} setOpen={setOpenSesamoe} idPoint={currentValue.id}/>
     </>
   );
 };

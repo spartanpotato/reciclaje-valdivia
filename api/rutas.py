@@ -144,19 +144,37 @@ async def get_reportes(id_punto: int, db: Session = Depends(get_db)):
     reportes = db.query(Reporte).filter(Reporte.id_punto == id_punto).all()
     return reportes
 
+#Cambia el estado de un punto a uno especifico
+@app.put("/reportes/{reporte_id}", response_model=ReporteResponse)
+def actualizar_reporte(reporte_id: int, reporte_update: ReporteUpdate, db: Session = Depends(get_db)):
+    reporte = db.query(Reporte).filter(Reporte.id_reporte == reporte_id).first()
+    if not reporte:
+        raise HTTPException(status_code=404, detail="Reporte no encontrado")
+    if reporte.estado == reporte_update.estado:
+        raise HTTPException(
+            status_code=400,
+            detail="El reporte ya está en el estado solicitado."
+        )
+    reporte.estado = reporte_update.estado
+    db.commit()
+    db.refresh(reporte)
+    return reporte
+
 @app.get("/resumen_reportes")
 async def resumen_reportes(db: Session = Depends(get_db)):
     resultados = (
         db.query(
             Punto.id_punto.label("punto_id"),
             Punto.direccion.label("direccion"),
+            Punto.coordx.label("coordx"),
+            Punto.coordy.label("coordy"),
             func.count(Reporte.id_reporte).label("total_reportes"),
             func.sum(case([(Reporte.estado == "completa", 1)], else_=0)).label("completa"),
             func.sum(case([(Reporte.estado == "eliminada", 1)], else_=0)).label("eliminada"),
             func.sum(case([(Reporte.estado == "pendiente", 1)], else_=0)).label("pendiente"),
         )
         .join(Reporte, Reporte.punto_id == Punto.id_punto)
-        .group_by(Punto.id_punto, Punto.direccion)
+        .group_by(Punto.id_punto, Punto.direccion, Punto.coordx, Punto.coordy)
         .order_by(func.count(Reporte.id_reporte).desc())
         .all()
     )
@@ -164,6 +182,8 @@ async def resumen_reportes(db: Session = Depends(get_db)):
         {
             "ID": resultado.punto_id,
             "Direccion": resultado.direccion,
+            "CoordX": resultado.coordx,
+            "CoordY": resultado.coordy,
             "Total": resultado.total_reportes,
             "Completa": resultado.completa,
             "Eliminada": resultado.eliminada,
