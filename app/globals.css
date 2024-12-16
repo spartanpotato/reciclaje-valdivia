@@ -219,11 +219,11 @@
 
 .PropButton{
   z-index: 99;
-  margin-left: 0.5%;
-  margin-right:0.5%;
+  margin-left: 25%;
+  margin-right:25%;
   margin-bottom: 0.5%;
   margin-top: 0.5%;
-  background-color:#93DFA3;
+  background-color:#d2f3d9;
   color: black;
 }
 

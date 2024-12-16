@@ -12,7 +12,7 @@ import {
 import { useState } from "react";
 import { useUserRole } from "@/app/providers/userRole";
 
-const ProponerPunto = ({ coordenadas }) => { 
+const ProponerPunto = ({ lat, lng }) => { 
     const { userType } = useUserRole(); 
     const [direccion, setDireccion] = useState(""); 
     const [materiales, setMateriales] = useState({
@@ -27,7 +27,7 @@ const ProponerPunto = ({ coordenadas }) => {
     if (userType === "guest" || userType === undefined) {
         return null; // No mostrar el botón para usuarios invitados o no autenticados
     }
-
+    console.log(typeof(String(lat)));
     const handleMaterialChange = (e) => {
         const { name, checked } = e.target;
         setMateriales((prevState) => ({
@@ -38,13 +38,6 @@ const ProponerPunto = ({ coordenadas }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        // Crear el cuerpo de la solicitud
-        const punto = {
-            direccion,
-            coordenadas, // Coordenadas pasadas como prop desde el mapa
-            materiales: Object.keys(materiales).filter((key) => materiales[key]),
-        };
 
         try {
             const response = await fetch("http://172.233.25.94:54321/puntos", {
@@ -53,7 +46,10 @@ const ProponerPunto = ({ coordenadas }) => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    ...punto,
+                    coordx: String(lat),
+                    coordy: String(lng),
+                    direccion: direccion,
+                    id_tipo: 11
                 })
             });
 
@@ -80,14 +76,14 @@ const ProponerPunto = ({ coordenadas }) => {
     return (
         <>
             <Menu isOpen={isOpen} onClose={onClose} size={"md"}>
-                <MenuButton as={Button} className="PropButton" mb={4} onClick={onOpen}>
-                    Proponer punto
+                <MenuButton as={Button} className="PropButton" mb={4} onClick={onOpen} size={"sm"}>
+                    Añadir punto 
                 </MenuButton>
                 
                 <MenuList className="ProponerPunto">
                     <form onSubmit={handleSubmit}>
                         <Box textAlign={"center"}>
-                            <Text mb={2} fontSize="2xl">Proponer punto </Text>
+                            <Text mb={2} fontSize="md">Proponer punto </Text>
                             <Box mb={4}>
                                 <Text mb={2} fontSize="xl">Dirección:</Text>
                                 <Input 

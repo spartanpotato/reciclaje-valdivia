@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import DrawerComponent from "@/app/components/DrawerComponent";
 import { useDisclosure } from "@chakra-ui/react";
 import Icons from "./iconos";
+import ProponerPunto from "../puntos/ProponerPunto";
 
 var CustomIcon = L.Icon.extend({
   options: {
@@ -139,12 +140,7 @@ function Map({ id_tipo, tipos }) {
           >
             <div>
               <h3>¿Quieres añadir un punto de reciclaje aquí?</h3>
-              <button 
-                onClick={handleAddRecyclingPoint}
-                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-              >
-                Añadir Punto de Reciclaje
-              </button>
+              <ProponerPunto lat={newPointLocation?.lat} lng={newPointLocation?.lng}/>
             </div>
           </Popup>
         )}
