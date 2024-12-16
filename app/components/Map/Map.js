@@ -117,7 +117,7 @@ function Map({ id_tipo, tipos }) {
             key={values.id}
             position={values.coord}
             icon={new CustomIcon({
-              iconUrl: Icons(currentArray),
+              iconUrl: Icons(values.tipo),
             })}
             eventHandlers={{
               click: () => {

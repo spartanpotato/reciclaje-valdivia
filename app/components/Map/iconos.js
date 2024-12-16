@@ -1,7 +1,8 @@
-export default function Icons(tipos) {
-    console.log("llego a iconos.js: ", tipos);
+export default function Icons(id_tipo) {
+    console.log("llego a iconos.js: ", id_tipo);
     var ImgURL = "/Icon/";
     var img = "";
+    /*
     var contador = 0;
     const ids = ["o_", "l_", "pc_", "v_", "p_"];
 
@@ -11,8 +12,10 @@ export default function Icons(tipos) {
         }
         contador += 1;
     });
-
+    
     img = img.slice(0, -1); // Remove trailing underscore
+    */
+    img += id_tipo
     ImgURL += img + ".png";
     return ImgURL;
 }
