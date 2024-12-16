@@ -23,18 +23,6 @@ function MapClickHandler({ onMapClick }) {
   return null;
 }
 
-function CenterMap({ lat, lng }) {
-  const map = useMap();
-
-  useEffect(() => {
-    if (lat && lng) {
-      map.setView([lat, lng], 15); // Sin animación
-    }
-  }, [lat, lng, map]);
-
-  return null;
-}
-
 function Map({ id_tipo, tipos }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [currentValue, setCurrentValue] = useState({});

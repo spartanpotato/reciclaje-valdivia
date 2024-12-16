@@ -14,7 +14,6 @@ import {
 import { useState } from "react";
 import ProponerPunto from "./puntos/ProponerPunto";
 import LoginRedirectButton from "./Botones Extra/linkedButton";
-import ReportsRedirectButton from "./Botones Extra/reportButton";
 
 function Menu_1({ Vidrio, setVidrio, Latas, setLatas, Plastico, setPlastico, Papel_Carton, setPapel_Carton, Organico, setOrganico }) {
     return (
@@ -42,7 +41,6 @@ function Menu_1({ Vidrio, setVidrio, Latas, setLatas, Plastico, setPlastico, Pap
               </MenuItem>
             </MenuList>
         </Menu>
-        <ReportsRedirectButton/>
         <LoginRedirectButton/>
         </Flex>
       </Box>
