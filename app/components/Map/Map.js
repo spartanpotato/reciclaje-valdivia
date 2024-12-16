@@ -67,6 +67,12 @@ function Map({ id_tipo, tipos }) {
     }
   }, [id_tipo]);
 
+  useEffect(() => {
+    if (currentValue && currentValue.id) {
+      setCurrentArray(tipos); 
+    }
+  }, [currentValue, tipos]); 
+
   const handleMapClick = (latlng) => {
     setNewPointLocation(latlng);
   };
@@ -102,13 +108,12 @@ function Map({ id_tipo, tipos }) {
             key={values.id}
             position={values.coord}
             icon={new CustomIcon({
-              iconUrl: Icons(tipos),
+              iconUrl: Icons(currentArray),
             })}
             eventHandlers={{
               click: () => {
                 onOpen();
                 setCurrentValue(values);
-                setCurrentArray(tipos);
               },
             }}
           ></Marker>

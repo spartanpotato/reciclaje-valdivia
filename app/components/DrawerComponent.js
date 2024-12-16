@@ -42,6 +42,8 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
   // suscribirse a servicios, o manipular el DOM.
   // Aquí se usa para obtener datos cuando cambio o currentValue cambian.
   useEffect(() => {
+    console.log("currentvalue: ", currentValue);
+    console.log("array en drawer: ", array);
     const fetchData = async () => {
       try {
         // Fetch comments for the current point
@@ -50,6 +52,7 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
+        console.log("comentarios: ", data);
         setComentarios(data);
       } catch (error) {
         console.error("Error fetching comments:", error);
@@ -81,7 +84,7 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
           <DrawerCloseButton />
 
           <DrawerHeader fontSize={"3xl"}>
-                {currentValue.nombre}                
+                {currentValue.direccion}                
                 <EditarPunto 
                   admin={usuario}
                   item={currentValue}
@@ -97,8 +100,7 @@ const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
               <DrawerBody>
                 <UnorderedList>
                   {array.map((info) => {
-                    const state = info.estado;
-                    if (state === 1){
+                    if (info.state){
                     return(
                     <ListItem>{info.nombre}</ListItem>
                     )}})}
