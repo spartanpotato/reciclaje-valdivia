@@ -10,7 +10,7 @@ const LoginRedirectButton = () => {
 
   // Verificar si el usuario está autenticado al montar el componente
   useEffect(() => {
-    const userSession = localStorage.getItem("isAuthenticated");
+    const userSession = sessionStorage.getItem("isAuthenticated");
 
     // Si el valor no está presente o no es "true", el usuario no está autenticado
     if (userSession === "true") {
@@ -28,7 +28,8 @@ const LoginRedirectButton = () => {
     }
     else {
       // Si está autenticado, cerramos la sesión
-      localStorage.setItem("isAuthenticated", "false");
+      sessionStorage.setItem("isAuthenticated", "false");
+      sessionStorage.setItem("isAdmin","false");
       setIsAuthenticated(false);
       //Recargar la pagina
       window.location.reload();

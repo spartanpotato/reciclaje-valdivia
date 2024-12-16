@@ -9,7 +9,7 @@ export default function Reports() {
   useEffect(() => {
     const obtenerReportes = async () => {
       try {
-        const response = await fetch('http://localhost:8000/resumen_reportes');
+        const response = await fetch('http://172.233.25.94:54321/resumen_reportes');
         if (!response.ok) {
           throw new Error('Error al obtener los reportes');
         }

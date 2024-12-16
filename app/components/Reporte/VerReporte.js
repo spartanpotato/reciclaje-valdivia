@@ -11,7 +11,7 @@ const ReportSeeButton = ({setOpenSesamoe}) => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    const userAdmin = localStorage.getItem("isAdmin");
+    const userAdmin = sessionStorage.getItem("isAdmin");
 
     if (userAdmin === "true") {
       setIsAdmin(true);

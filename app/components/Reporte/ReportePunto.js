@@ -6,17 +6,18 @@ import {
     ModalOverlay, ModalContent, ModalHeader, 
     ModalCloseButton, ModalBody,
     Thead, Tbody, Tr,
-     Th, Td
+    Th, Td, Spinner
 } from "@chakra-ui/react";
 
 
 const ReportInPoint = ({isOpen,setOpen,idPoint}) => {
-    
+    const [loading, setLoading] = useState(false);
     const [reports,setReports] = useState([]);
 
     useEffect(() => {
-        if (isOpen) {
+        if (isOpen && idPoint) {
             const fetchReports = async () => {
+                setLoading(true);
                 try {
                     const response = await fetch(`http://172.233.25.94:54321/reportes/${idPoint}`);
                     if (!response.ok) {
@@ -28,14 +29,13 @@ const ReportInPoint = ({isOpen,setOpen,idPoint}) => {
                 } catch (error) {
                     console.error("Error al obtener los reportes", error);
                 }
+                finally{
+                    setLoading(false);
+                }
             };
             fetchReports();
         }
     }, [isOpen, idPoint]);
-
-    const handleStateComp = () => {
-        setOpen(false);
-    };
 
     const handleReportState = async (actualReport, reportState) => {
         try {
@@ -53,9 +53,14 @@ const ReportInPoint = ({isOpen,setOpen,idPoint}) => {
 
             setReports((prevReports) => prevReports.filter((report) => report.id_reporte !== actualReport));
             console.log("Reporte actualizado exitosamente");
+            alert("Se Cambio el estado del Reporte!!!");
         } catch (error) {
             console.error("Error al enviar la solicitud a la API", error);
         }
+    };
+    const handleStateComp = () => {
+        setReports([]);
+        setOpen(false);
     };
 
     return(<Modal isOpen={isOpen} onClose={handleStateComp}>
@@ -64,6 +69,7 @@ const ReportInPoint = ({isOpen,setOpen,idPoint}) => {
           <ModalHeader>Lista de Reportes</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+            {loading? (<Spinner/>): reports.length === 0? (<p>No hay reportes pendientes</p>):(
           <Table variant="striped" colorScheme="teal">
             <Thead>
             <Tr>
@@ -83,14 +89,14 @@ const ReportInPoint = ({isOpen,setOpen,idPoint}) => {
                     <Button
                     colorScheme="red"
                     size="sm"
-                    onClick={handleReportState(report.id_reporte,"eliminado")}
+                    onClick={() => handleReportState(report.id_reporte,"eliminado")}
                     >
                     Eliminar
                     </Button>
                     <Button
                     colorScheme="green" 
                     size="sm"
-                    onClick={handleReportState(report.id_reporte,"completado")}
+                    onClick={() => handleReportState(report.id_reporte,"completado")}
                     >
                     Completar
                     </Button>
@@ -99,6 +105,7 @@ const ReportInPoint = ({isOpen,setOpen,idPoint}) => {
             ))}
             </Tbody>
             </Table>
+            )}
             </ModalBody>
         </ModalContent>
       </Modal>);

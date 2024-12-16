@@ -8,7 +8,7 @@ const ReportsRedirectButton = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const userAdmin = localStorage.getItem("isAdmin");
+    const userAdmin = sessionStorage.getItem("isAdmin");
 
     if (userAdmin === "true") {
       setIsAdmin(true);

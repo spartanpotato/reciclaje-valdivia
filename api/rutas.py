@@ -175,7 +175,7 @@ async def resumen_reportes(db: Session = Depends(get_db)):
         )
         .join(Reporte, Reporte.punto_id == Punto.id_punto)
         .group_by(Punto.id_punto, Punto.direccion, Punto.coordx, Punto.coordy)
-        .order_by(func.count(Reporte.id_reporte).desc())
+        .order_by(func.sum(case([(Reporte.estado == "pendiente", 1)], else_=0)).desc())
         .all()
     )
     respuesta = [
