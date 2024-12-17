@@ -14,156 +14,126 @@ import {
   Text,
   Flex,
 } from "@chakra-ui/react";
-import { useRef } from "react";
-import { useDisclosure } from "@chakra-ui/react";
+import { useRef, useState, useEffect } from "react";
 import ListComments from "./Comentarios/ListComments";
 import CrearComentario from "./Comentarios/CrearComentario";
-import { useState,useEffect } from "react";
 import CrearReporte from "./Reporte/CrearReporte";
 import EditarPunto from "./puntos/EditarPunto";
 import ReportSeeButton from "./Reporte/VerReporte";
 import ReportInPoint from "./Reporte/ReportePunto";
 
 // Componente : Sidebar en el mapa al apretar un punto
-
-// Define el componente DrawerComponent y su estado utilizando:
-// useState =  un hook de React que permite añadir estado a un componente funcional.
-// useRef = hook de React que permite crear una referencia mutable que persiste durante 
-// todo el ciclo de vida del componente.
-const DrawerComponent = ({ isOpen, onClose, currentValue, array }) => {
-  // comentarios : Estado que almacena una lista de comentarios.
-  // setComentarios : Función para actualizar el estado "comentarios".
-  // useState([]) : Se usa para inicializar el estado "comentarios" con un array vacío.
+const DrawerComponent = ({ isOpen, onClose, currentValue, array, onUpdate }) => {
   const [comentarios, setComentarios] = useState([]); 
   const [usuario, setUsuario] = useState("");
-  const [comentario, setComnetario] = useState();
-  const [cambio, setCambio] = useState(true);
+  const [comentario, setComentario] = useState();
+  const [cambio, setCambio] = useState(true); // Trigger para actualizaciones
   const { btnOpen } = useRef();
   const [isOpenSesamoe, setOpenSesamoe] = useState(false);
   const [currentArray, setCurrentArray] = useState([]);
-  console.log(currentValue);
-  // Permite realizar efectos secundarios en componentes funcionales, como obtener datos, 
-  // suscribirse a servicios, o manipular el DOM.
-  // Aquí se usa para obtener datos cuando cambio o currentValue cambian.
+
+  // Función para capitalizar y reemplazar los guiones bajos por barras
+  const capitalizeAndFormat = (text) => {
+    return text
+      .replace(/_/g, "/") // Reemplaza "_" por "/"
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitaliza cada palabra
+      .join(" ");
+  };
+
+  // Refresca los datos de comentarios y tipos
   useEffect(() => {
-    if (!currentValue || !currentValue.tipos) {
-      console.log("currentValue or tipos is null, skipping effect.");
-      return; // Exit early if currentValue is null or does not have tipos
-    }
-    console.log("currentvalue: ", currentValue);
-    console.log("array en drawer: ", array);
+    if (!currentValue || !currentValue.tipos) return;
+
     const fetchData = async () => {
       try {
-        // Fetch comments for the current point
         const response = await fetch(`http://172.233.25.94:54321/comentarios/${currentValue.id}`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
-        }
+        if (!response.ok) throw new Error("Failed to fetch data");
         const data = await response.json();
-        console.log("comentarios: ", data);
         setComentarios(data);
       } catch (error) {
         console.error("Error fetching comments:", error);
       }
     };
-    fetchData();
 
     const tiposArray = Object.entries(currentValue.tipos)
-        .filter(([key]) => key !== "id_tipo") 
-        .map(([key, value]) => ({ key, value }));
-
-    console.log("Converted tipos array: ", tiposArray);
-
+      .filter(([key]) => key !== "id_tipo")
+      .map(([key, value]) => ({ key, value }));
     setCurrentArray(tiposArray);
-    
+
+    fetchData();
   }, [cambio, currentValue]);
 
-  // define la estructura y el contenido del componente DrawerComponent, que es una sideBar (drawer).
-  // <Drawer> :  Componente principal del sideBar
-  // <DrawerOverlay> : Crea una superposición detrás del drawer para oscurecer el contenido de fondo.
-  // <DrawerContent> : Contenedor principal del contenido del drawer.
-  // <DrawerCloseButton> : Botón para cerrar el drawer.
-  // <DrawerHeader> : Encabezado del drawer. Muestra el nombre del currentValue
-  // <DrawerBody>: Cuerpo del drawer. Contiene el contenido principal del drawer.
-  // <Text> : Componente del texto de Chakra UI
-  // <UnorderedList> : Lista desordenada. <ListItem> : Elementos de la lista
-  // <CrearComentario> : Componente para crear un nuevo comentario.
-  // <ListComments> : Muestra la lista de comentarios.
-  // <Box> : Contenedor que envuelve el componente ListComments.
-  // <DrawerFooter> : Pie de página del drawer. Contiene un botón para cerrar el drawer.
-  // <Button> : Crea un botón.
-  
+  // Llama a esta función para actualizar datos al editar un punto
+  const handleUpdate = () => {
+    setCambio(!cambio); // Cambia el trigger para refrescar el `useEffect`
+    if (onUpdate) onUpdate(); // Notifica al componente padre
+  };
+
   return (
     <>
       <Drawer finalFocusRef={btnOpen} isOpen={isOpen} placement="right" onClose={onClose} size={"lg"}>
-        <DrawerOverlay/>
+        <DrawerOverlay />
         <DrawerContent className="Drawer" fontSize={"xl"} background={"green.100"}>
           <DrawerCloseButton />
 
           <DrawerHeader fontSize={"3xl"}>
-                {currentValue.direccion}                
-                <EditarPunto 
-                  admin={usuario}
-                  item={currentValue}
-                />
-                <ReportSeeButton setOpenSesamoe={setOpenSesamoe}/>
+            {currentValue.direccion}
+            <EditarPunto 
+              onUpdate={handleUpdate} // Actualiza después de editar
+              admin={usuario}
+              item={currentValue}
+            />
+            <ReportSeeButton setOpenSesamoe={setOpenSesamoe} />
           </DrawerHeader>
 
+          <DrawerBody>
+            <DrawerHeader>
+              <Text fontSize="2xl" fontWeight="bold" mb={2} mt={2}>
+                Permite reciclar:
+              </Text>
+            </DrawerHeader>
             <DrawerBody>
-              <DrawerHeader>
-                <Text fontSize="2xl" fontWeight="bold" mb={2} mt={2}>
-                  Permite reciclar:
-                </Text>
-              </DrawerHeader>
-              <DrawerBody>
-                <UnorderedList>
-                  {currentArray.map((info) => {
-                    if (info.value){
-                    return(
-                    <ListItem>{info.key}</ListItem>
-                    )}})}
-                </UnorderedList>
-              </DrawerBody>
-
-
-              <DrawerHeader>
-                <Text fontSize="2xl" fontWeight="bold" mb={2} mt={4}>
-                  Comentarios:
-                </Text>
-              </DrawerHeader>
-
-              <DrawerBody>
-                <CrearComentario
-                  usuario={usuario}
-                  comentario={comentario}
-                  setComentario={setComnetario}
-                  idItem={currentValue.id}
-                  cambio={cambio}
-                  setCambio={setCambio}
-                />
-                <Box>
-                <ListComments comentarios={comentarios} cambio={cambio} setCambio={setCambio} />
-                </Box>   
-              </DrawerBody>
-
+              <UnorderedList>
+                {currentArray.map((info) => (
+                  info.value && <ListItem key={info.key}>{capitalizeAndFormat(info.key)}</ListItem>
+                ))}
+              </UnorderedList>
             </DrawerBody>
+
+            <DrawerHeader>
+              <Text fontSize="2xl" fontWeight="bold" mb={2} mt={4}>
+                Comentarios:
+              </Text>
+            </DrawerHeader>
+
+            <DrawerBody>
+              <CrearComentario
+                usuario={usuario}
+                comentario={comentario}
+                setComentario={setComentario}
+                idItem={currentValue.id}
+                cambio={cambio}
+                setCambio={setCambio}
+              />
+              <Box>
+                <ListComments comentarios={comentarios} cambio={cambio} setCambio={setCambio} />
+              </Box>
+            </DrawerBody>
+          </DrawerBody>
 
           <DrawerFooter>
             <Flex justify="space-between" width="100%">
-              <CrearReporte
-                  idItem={currentValue.id}
-                />
+              <CrearReporte idItem={currentValue.id} />
               <Button variant="solid" size={"lg"} mr={3} onClick={onClose}>
                 Volver
               </Button>
-              <ReportInPoint/>
+              <ReportInPoint />
             </Flex>
-
           </DrawerFooter>
-
         </DrawerContent>
       </Drawer>
-      <ReportInPoint isOpen={isOpenSesamoe} setOpen={setOpenSesamoe} idPoint={currentValue.id}/>
+      <ReportInPoint isOpen={isOpenSesamoe} setOpen={setOpenSesamoe} idPoint={currentValue.id} />
     </>
   );
 };

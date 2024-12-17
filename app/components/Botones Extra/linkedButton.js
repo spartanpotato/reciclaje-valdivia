@@ -13,7 +13,8 @@ const LoginRedirectButton = () => {
     const userSession = sessionStorage.getItem("isAuthenticated");
 
     // Si el valor no está presente o no es "true", el usuario no está autenticado
-    if (userSession === "true") {
+    console.log(userSession);
+    if (userSession === "true" || userSession == true) {
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);

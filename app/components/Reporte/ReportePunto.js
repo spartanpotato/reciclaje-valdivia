@@ -64,7 +64,7 @@ const ReportInPoint = ({isOpen,setOpen,idPoint}) => {
     };
 
     return(<Modal isOpen={isOpen} onClose={handleStateComp}>
-        <ModalOverlay />
+        <ModalOverlay/>
         <ModalContent>
           <ModalHeader>Lista de Reportes</ModalHeader>
           <ModalCloseButton />

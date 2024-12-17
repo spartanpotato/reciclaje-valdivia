@@ -12,17 +12,17 @@ import {
 import { useState } from "react";
 import { useUserRole } from "@/app/providers/userRole";
 
-const EditarPunto = ({ admin, item }) => { 
-  const { userType } = useUserRole(); // Obtener el userType del contexto
-  const [direccion, setDireccion] = useState(item.nombre); // Estado para la dirección
+const EditarPunto = ({ admin, item, onUpdate }) => { 
+  const { userType } = useUserRole();
+  const [direccion, setDireccion] = useState(item.nombre);
   const [materiales, setMateriales] = useState({
     plastico: item.materiales?.includes("plastico") || false,
     vidrio: item.materiales?.includes("vidrio") || false,
     papelCarton: item.materiales?.includes("papelCarton") || false,
     latas: item.materiales?.includes("latas") || false,
     organico: item.materiales?.includes("organico") || false, 
-  }); 
-  const { isOpen, onOpen, onClose } = useDisclosure(); // Controlar el menú
+  });
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   if (userType !== "admin") {
     return null;
@@ -36,37 +36,42 @@ const EditarPunto = ({ admin, item }) => {
     }));
   };
 
-  // Función para enviar la solicitud PUT
-  const sendRequest = async () => {
-    // Definir los tipos con sus índices y valores de estado
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     const tipos_1 = [
-        { nombre: "Organico", state: Organico, indice: 0 },
-        { nombre: "Latas", state: Latas, indice: 1 },
-        { nombre: "Papel_Carton", state: Papel_Carton, indice: 2 },
-        { nombre: "Vidrio", state: Vidrio, indice: 3 },
-        { nombre: "Plastico", state: Plastico, indice: 4 }
+      { nombre: "Organico", state: materiales.organico, indice: 0 },
+      { nombre: "Latas", state: materiales.latas, indice: 1 },
+      { nombre: "Papel_Carton", state: materiales.papelCarton, indice: 2 },
+      { nombre: "Vidrio", state: materiales.vidrio, indice: 3 },
+      { nombre: "Plastico", state: materiales.plastico, indice: 4 },
     ];
 
     const id_tipo = tipos_1.reduce((acc, tipo) => {
-        return acc + (tipo.state ? Math.pow(2, tipo.indice) : 0);
+      return acc + (tipo.state ? Math.pow(2, tipo.indice) : 0);
     }, 1);
 
     try {
-      const response = await fetch(`/puntos/${item.id}`, {
+      const response = await fetch(`http://172.233.25.94:54321/puntos/${item.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            direccion: direccion,
-            id_tipo: id_tipo
-        }
-        ),
+          direccion: direccion,
+          id_tipo: id_tipo,
+        }),
       });
 
       if (response.ok) {
         alert("Punto actualizado correctamente.");
         onClose();
+        
+        // Llama a onUpdate para notificar que los datos cambiaron
+        if (onUpdate) {
+          const data = await response.json(); // Obtener los datos actualizados
+          onUpdate(data); // Notificar al componente padre
+        }
       } else {
         const error = await response.json();
         console.error("Error al actualizar el punto:", error);
@@ -76,11 +81,6 @@ const EditarPunto = ({ admin, item }) => {
       console.error("Error en la solicitud:", error);
       alert("Hubo un error en la conexión.");
     }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await sendRequest(); // Enviar solicitud PUT
   };
 
   return (
@@ -105,6 +105,7 @@ const EditarPunto = ({ admin, item }) => {
               </Box>
               <Box mb={4}>
                 <Text mb={2} fontSize="2xl">Materiales: </Text>
+                {/* Checkboxes */}
                 <Box>
                   <label className="checkboxLabel">
                     <input 

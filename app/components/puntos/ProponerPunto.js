@@ -12,7 +12,7 @@ import {
 import { useState } from "react";
 import { useRouter } from "next/navigation"; // Importamos useRouter para la redirección
 
-const ProponerPunto = ({ lat, lng, userType }) => {  
+const ProponerPunto = ({ lat, lng, userType, onUpdate }) => {  
     const [direccion, setDireccion] = useState(""); 
     const [materiales, setMateriales] = useState({
         plastico: false,
@@ -78,7 +78,7 @@ const ProponerPunto = ({ lat, lng, userType }) => {
                 throw new Error("Error al proponer el punto");
             }
 
-            alert("Punto propuesto exitosamente");
+            alert("Punto añadido exitosamente");
             setDireccion(""); // Limpiar campos
             setMateriales({
                 plastico: false,
@@ -87,6 +87,9 @@ const ProponerPunto = ({ lat, lng, userType }) => {
                 latas: false,
                 organico: false, 
             }); 
+            if (onUpdate) {
+                onUpdate();  // Esto llamará al método que actualizará el mapa
+            }
             onClose(); // Cerrar el menú
         } catch (error) {
             console.error("Error al enviar la solicitud:", error);

@@ -73,16 +73,12 @@ const CrearReporte = ({
             <MenuList className="CrearReportes">
                 <form onSubmit={handleSubmit}>
                     <Box textAlign={"center"}>
-                        <Input // Sección donde se ingresa el nombre del usuario que hace el reporte
-                            className="ReportInput" 
-                            placeholder="Usuario" 
-                            value={userName}
-                            readOnly 
-                        />
                         <Textarea // Area donde se ingresa el texto del reporte
                             className="ReportInput" 
-                            placeholder="Reporte" 
+                            placeholder="Escribe tu reporte aquí" 
                             value={reporte} onChange={(e) => setReporte(e.target.value)} 
+                            height="300px"
+                            width="300px"
                         />
                         <Button type="submit">Enviar</Button>
                     </Box>

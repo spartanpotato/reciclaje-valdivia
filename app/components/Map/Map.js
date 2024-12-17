@@ -31,48 +31,58 @@ function Map({ id_tipo, tipos }) {
   const [newPointLocation, setNewPointLocation] = useState(null);
   const [data, setData] = useState([]);
   const { userType } = useUserRole();
-
-  // Volver a traer data cada vez que cambie el id_tipo
-  useEffect(() => {
-    if (id_tipo !== undefined) {
-      const fetchData = async () => {
-        try {
-          const response = await fetch(`http://172.233.25.94:54321/puntos/tipos/${id_tipo}`);
-          if (!response.ok) {
-            throw new Error("Failed to fetch puntos");
-          }
-          const puntos = await response.json();
-
-          console.log("id_tipo enviado: ", id_tipo);
-
-          console.log("puntos del fetch: ", puntos);
-
   
-          // Format the data based on the response structure
-          const formattedData = puntos.map((punto) => ({
-            id: punto.id_punto,
-            coord: [parseFloat(punto.coordx), parseFloat(punto.coordy)],
-            direccion: punto.direccion,
-            tipo: punto.tipo.id_tipo, // Access id_tipo from tipo object
-            tipos: punto.tipo,
-          }));
+  const handleUpdate = (updatedPoint) => {
+    setData((prevData) => 
+      prevData.map((point) =>
+        point.id === updatedPoint.id
+          ? { ...point, ...updatedPoint } // Actualiza solo el punto modificado
+          : point
+      )
+    );
   
-          setData(formattedData);  // Set data as an array
-        } catch (error) {
-          console.error("Error fetching puntos:", error);
-          setData([]);  // In case of error, ensure data is an empty array
-        }
-      };
+    setCurrentValue((prevValue) =>
+      prevValue.id === updatedPoint.id
+        ? { ...prevValue, ...updatedPoint } // Actualiza también el sidebar
+        : prevValue
+    );
+  };
   
-      fetchData();
+  // Función para obtener datos actualizados
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`http://172.233.25.94:54321/puntos/tipos/${id_tipo}`);
+      if (!response.ok) throw new Error("Failed to fetch puntos");
+      const puntos = await response.json();
+
+      console.log("id_tipo enviado: ", id_tipo);
+      console.log("puntos del fetch: ", puntos);
+
+      const formattedData = puntos.map((punto) => ({
+        id: punto.id_punto,
+        coord: [parseFloat(punto.coordx), parseFloat(punto.coordy)],
+        direccion: punto.direccion,
+        tipo: punto.tipo.id_tipo,
+        tipos: punto.tipo,
+      }));
+
+      setData(formattedData); // Actualiza los puntos en el mapa
+    } catch (error) {
+      console.error("Error fetching puntos:", error);
+      setData([]); // Si hay error, deja el mapa vacío
     }
-  }, [id_tipo]);
+  };
 
+  // Llama a fetchData cuando cambie el id_tipo
+  useEffect(() => {
+    fetchData();
+  }, []);
+  
   useEffect(() => {
     if (currentValue && currentValue.id) {
-      setCurrentArray(tipos); 
+      setCurrentArray(tipos);
     }
-  }, [currentValue, tipos]); 
+  }, [currentValue, tipos]);
 
   const handleMapClick = (latlng) => {
     setNewPointLocation(latlng);
@@ -87,15 +97,14 @@ function Map({ id_tipo, tipos }) {
         className="homeMap"
       >
         <MapClickHandler onMapClick={handleMapClick} />
-        
+
         <TileLayer
           attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {/* Existing markers */}
-        {data.map((values) => {
 
-          return (
+        {/* Marcadores actuales */}
+        {data.map((values) => (
           <Marker
             key={values.id}
             position={values.coord}
@@ -108,12 +117,10 @@ function Map({ id_tipo, tipos }) {
                 setCurrentValue(values);
               },
             }}
-          ></Marker>
-          )
-          }
-        )}
+          />
+        ))}
 
-        {/* New point location popup */}
+        {/* Popup para añadir un nuevo punto */}
         {newPointLocation && (
           <Popup 
             position={newPointLocation}
@@ -121,16 +128,19 @@ function Map({ id_tipo, tipos }) {
           >
             <div>
               <h3>¿Quieres añadir un punto de reciclaje aquí?</h3>
-              <ProponerPunto lat={newPointLocation?.lat} lng={newPointLocation?.lng} userType={userType}/>
+              <ProponerPunto lat={newPointLocation?.lat} lng={newPointLocation?.lng} userType={userType} onUpdate={fetchData}/>
             </div>
           </Popup>
         )}
       </MapContainer>
-      <DrawerComponent 
-        currentValue={currentValue} 
-        isOpen={isOpen} 
-        onClose={onClose} 
-        array={currentArray} 
+
+      {/* Drawer que actualiza puntos */}
+      <DrawerComponent
+        currentValue={currentValue}
+        isOpen={isOpen}
+        onClose={onClose}
+        array={currentArray}
+        onUpdate={fetchData}
       />
     </>
   );
